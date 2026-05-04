@@ -9,30 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { fadeUp, stagger, viewport } from "@/lib/motion";
 
-const collage = [
-  {
-    src: "https://framerusercontent.com/images/rTCecVJvlUX4vk5N62cZegy9A.png",
-    alt: "Woman doing yoga",
-    className:
-      "col-span-2 aspect-[3/4] rotate-[-3deg] translate-y-2",
-  },
-  {
-    src: "https://framerusercontent.com/images/SJeYfmDXTnQ78kAjryUb3BRTfCM.png",
-    alt: "Oranges falling into water",
-    className: "aspect-[3/4] rotate-[2deg] -translate-y-3",
-  },
-  {
-    src: "https://framerusercontent.com/images/gKM8NHPF6nUIuVZAxt5Z3WTWk4M.png",
-    alt: "Happy woman in white t-shirt",
-    className: "aspect-[3/4] rotate-[-1deg]",
-  },
-  {
-    src: "https://framerusercontent.com/images/p3oPxuTOfbFzdz8u2rijPvMDk7A.png",
-    alt: "Man doing sport on stairs",
-    className: "aspect-[3/4] rotate-[3deg] translate-y-4",
-  },
-];
-
 const avatars = [
   "https://framerusercontent.com/images/4wjZwfbCu9WSrGLaPidnqyFVOiY.png",
   "https://framerusercontent.com/images/UTixYtYPsd5TN5Kmj8fqigwo.png",
@@ -183,40 +159,6 @@ export function Hero() {
                 </span>
               ))}
             </motion.div>
-          </motion.div>
-        </motion.div>
-
-        {/* Image collage */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={viewport}
-          variants={stagger(0.08, 0.15)}
-          className="mt-16 grid grid-cols-2 gap-3 sm:grid-cols-5 sm:gap-4"
-        >
-          {collage.map((item) => (
-            <motion.figure
-              key={item.src}
-              variants={fadeUp}
-              className={`relative overflow-hidden rounded-3xl bg-muted shadow-sm ring-1 ring-border ${item.className}`}
-            >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                sizes="(max-width: 640px) 50vw, 20vw"
-                className="object-cover"
-              />
-            </motion.figure>
-          ))}
-          <motion.div
-            variants={fadeUp}
-            className="relative hidden aspect-3/4 flex-col items-center justify-center gap-2 rounded-3xl bg-primary p-4 text-center text-primary-foreground sm:flex"
-          >
-            <span className="font-display text-4xl leading-none">100k+</span>
-            <span className="text-xs opacity-90">
-              Health goals achieved this year
-            </span>
           </motion.div>
         </motion.div>
 
