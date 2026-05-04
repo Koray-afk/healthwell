@@ -40,13 +40,29 @@ const avatars = [
   "https://framerusercontent.com/images/rIRLprwNdsjH8v6vKiovBVtDDUI.png",
 ];
 
+const integrations = [
+  { label: "Google Health Connect" },
+  { label: "Ultrahuman" },
+  { label: "Fitbit", soon: true },
+  { label: "Coros", soon: true },
+  { label: "Xiaomi", soon: true },
+  { label: "Whoop" },
+  { label: "Garmin" },
+  { label: "Oura" },
+  { label: "Apple Health" },
+  { label: "Strava" },
+  { label: "Polar" },
+  { label: "Suunto" },
+  { label: "Samsung Health" },
+];
+
 export function Hero() {
   return (
     <section className="relative overflow-hidden pb-20 pt-16 sm:pt-20 lg:pb-32 lg:pt-24">
       {/* Decorative gradient blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-[-10%] h-[60vh] w-[80vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,_var(--accent),_transparent_70%)] opacity-60 blur-3xl" />
-        <div className="absolute right-[-10%] top-1/3 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,_var(--primary),_transparent_70%)] opacity-20 blur-3xl" />
+        <div className="absolute left-1/2 top-[-10%] h-[60vh] w-[80vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--accent),transparent_70%)] opacity-60 blur-3xl" />
+        <div className="absolute right-[-10%] top-1/3 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,var(--primary),transparent_70%)] opacity-20 blur-3xl" />
       </div>
 
       <Container>
@@ -123,6 +139,33 @@ export function Hero() {
               happy clients use HealthWell® daily
             </span>
           </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="relative mt-10 w-full overflow-hidden rounded-[2rem] border border-border bg-black px-4 py-4 shadow-lg shadow-black/10 sm:px-6"
+          >
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-black to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-black to-transparent" />
+            <motion.div
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ repeat: Infinity, duration: 28, ease: "linear" }}
+              className="flex w-max gap-3"
+            >
+              {[...integrations, ...integrations].map((item, index) => (
+                <span
+                  key={`${item.label}-${index}`}
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur"
+                >
+                  {item.label}
+                  {item.soon ? (
+                    <span className="text-xs uppercase tracking-[0.2em] text-white/35">
+                      soon
+                    </span>
+                  ) : null}
+                </span>
+              ))}
+            </motion.div>
+          </motion.div>
         </motion.div>
 
         {/* Image collage */}
@@ -150,7 +193,7 @@ export function Hero() {
           ))}
           <motion.div
             variants={fadeUp}
-            className="relative hidden aspect-[3/4] flex-col items-center justify-center gap-2 rounded-3xl bg-primary p-4 text-center text-primary-foreground sm:flex"
+            className="relative hidden aspect-3/4 flex-col items-center justify-center gap-2 rounded-3xl bg-primary p-4 text-center text-primary-foreground sm:flex"
           >
             <span className="font-display text-4xl leading-none">100k+</span>
             <span className="text-xs opacity-90">
