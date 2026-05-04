@@ -142,10 +142,10 @@ export function Hero() {
 
           <motion.div
             variants={fadeUp}
-            className="relative mt-10 w-full overflow-hidden rounded-[2rem] border border-border bg-black px-4 py-4 shadow-lg shadow-black/10 sm:px-6"
+            className="relative mt-10 w-full overflow-hidden rounded-[2rem] border border-border bg-background/95 px-4 py-4 shadow-[0_18px_60px_rgba(15,23,42,0.08)] backdrop-blur sm:px-6"
           >
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-black to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-black to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-background to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-background to-transparent" />
             <motion.div
               animate={{ x: ["0%", "-50%"] }}
               transition={{ repeat: Infinity, duration: 28, ease: "linear" }}
@@ -154,11 +154,11 @@ export function Hero() {
               {[...integrations, ...integrations].map((item, index) => (
                 <span
                   key={`${item.label}-${index}`}
-                  className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-2 text-sm font-medium text-foreground shadow-sm"
                 >
                   {item.label}
                   {item.soon ? (
-                    <span className="text-xs uppercase tracking-[0.2em] text-white/35">
+                    <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                       soon
                     </span>
                   ) : null}
