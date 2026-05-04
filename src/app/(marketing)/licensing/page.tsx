@@ -11,7 +11,7 @@ export default function LicensingPage() {
           <SectionHeading
             eyebrow="Legal"
             title={<>Licensing <span className="italic text-primary">terms</span></>}
-            description="Use of the HealthWell brand, content, and product."
+            description="Use of the Wizzaid brand, content, and product."
           />
         </Container>
       </Section>
@@ -20,8 +20,8 @@ export default function LicensingPage() {
         <Container className="max-w-3xl">
           <article className="space-y-6 leading-relaxed text-foreground/90">
             <p>
-              All HealthWell brand assets — including the wordmark, logo and
-              illustrations — are © HealthWell. You may not reproduce, modify,
+              All Wizzaid brand assets — including the wordmark, logo and
+              illustrations — are © Wizzaid. You may not reproduce, modify,
               or distribute them without express written permission.
             </p>
             <h2 className="font-display text-2xl">Content</h2>
@@ -29,14 +29,14 @@ export default function LicensingPage() {
               Articles and educational content are licensed for personal,
               non-commercial use. For syndication or republication, contact us
               at{" "}
-              <a className="text-primary underline" href="mailto:partners@healthwell.app">
-                partners@healthwell.app
+              <a className="text-primary underline" href="mailto:partners@wizzaid.app">
+                partners@wizzaid.app
               </a>
               .
             </p>
             <h2 className="font-display text-2xl">Open source</h2>
             <p>
-              HealthWell is built with love on top of incredible open-source
+              Wizzaid is built with love on top of incredible open-source
               projects. We open-source useful pieces of our work back to the
               community whenever we can.
             </p>

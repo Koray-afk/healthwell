@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { DashboardShell } from "@/components/dashboard/shell";
 
 export const metadata: Metadata = {
-  title: { default: "Dashboard", template: "%s · Dashboard · HealthWell" },
-  description: "Your HealthWell dashboard.",
+  title: { default: "Dashboard", template: "%s · Dashboard · Wizzaid" },
+  description: "Your Wizzaid dashboard.",
   robots: { index: false, follow: false },
 };
 

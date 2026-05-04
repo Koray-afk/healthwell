@@ -86,7 +86,7 @@ export default async function OpengraphImage() {
             Health · Wellness · Wellbeing
           </div>
           <div style={{ fontSize: 22, color: "#64748b" }}>
-            healthwell.example.com
+            wizzaid.example.com
           </div>
         </div>
       </div>

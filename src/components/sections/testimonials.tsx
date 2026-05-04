@@ -9,7 +9,7 @@ import { Section, SectionHeading } from "@/components/ui/section";
 const items = [
   {
     quote:
-      "HealthWell has transformed how I manage my health. The appointment scheduling feature is a lifesaver!",
+      "Wizzaid has transformed how I manage my health. The appointment scheduling feature is a lifesaver!",
     name: "John Smith",
     role: "Software Engineer",
     avatar:
@@ -17,7 +17,7 @@ const items = [
   },
   {
     quote:
-      "With HealthWell, I can track my medication easily. It has improved my adherence significantly.",
+      "With Wizzaid, I can track my medication easily. It has improved my adherence significantly.",
     name: "Sarah Johnson",
     role: "Teacher",
     avatar:
@@ -25,7 +25,7 @@ const items = [
   },
   {
     quote:
-      "The telemedicine consultations on HealthWell saved me so much time and hassle. Highly recommend!",
+      "The telemedicine consultations on Wizzaid saved me so much time and hassle. Highly recommend!",
     name: "Michael Brown",
     role: "Entrepreneur",
     avatar:

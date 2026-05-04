@@ -24,7 +24,7 @@ export default function FeaturesPage() {
                 <span className="italic text-primary">live well</span>
               </>
             }
-            description="From medication reminders to telemedicine, HealthWell brings every part of your wellness journey into one calm, focused experience."
+            description="From medication reminders to telemedicine, Wizzaid brings every part of your wellness journey into one calm, focused experience."
           />
         </Container>
       </Section>

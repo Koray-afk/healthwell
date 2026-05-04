@@ -1,15 +1,15 @@
 export const siteConfig = {
-  name: "HealthWell",
-  brand: "HealthWell®",
-  tagline: "Improve Your Health with HealthWell®",
+  name: "Wizzaid",
+  brand: "Wizzaid®",
+  tagline: "Improve Your Health with Wizzaid®",
   description:
-    "HealthWell is a comprehensive healthcare app that empowers individuals to take control of their health and well-being.",
-  url: "https://healthwell.example.com",
+    "Wizzaid is a comprehensive healthcare app that empowers individuals to take control of their health and well-being.",
+  url: "https://wizzaid.example.com",
   ogImage: "/og.png",
   links: {
-    twitter: "https://twitter.com/healthwell",
-    instagram: "https://instagram.com/healthwell",
-    linkedin: "https://linkedin.com/company/healthwell",
+    twitter: "https://twitter.com/wizzaid",
+    instagram: "https://instagram.com/wizzaid",
+    linkedin: "https://linkedin.com/company/wizzaid",
   },
   nav: [
     { label: "Home", href: "/" },

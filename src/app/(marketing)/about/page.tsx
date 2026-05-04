@@ -26,7 +26,7 @@ export default function AboutPage() {
                 <span className="italic text-primary">Our Expedition</span>
               </>
             }
-            description="HealthWell was born from a belief that quality healthcare should be accessible, simple, and human."
+            description="Wizzaid was born from a belief that quality healthcare should be accessible, simple, and human."
           />
         </Container>
       </Section>

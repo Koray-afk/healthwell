@@ -86,14 +86,14 @@ export function Hero() {
           >
             Improve Your Health{" "}
             <span className="italic text-primary">with</span>{" "}
-            <span className="whitespace-nowrap">HealthWell®</span>
+            <span className="whitespace-nowrap">Wizzaid®</span>
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
             className="mt-6 max-w-xl text-pretty text-base text-muted-foreground sm:text-lg"
           >
-            HealthWell simplifies your healthcare experience, putting you in
+            Wizzaid simplifies your healthcare experience, putting you in
             control of your well-being. Take the first step toward a healthier,
             happier life.
           </motion.p>
@@ -136,7 +136,7 @@ export function Hero() {
             </div>
             <span>
               <span className="font-semibold text-foreground">+1.8M</span>{" "}
-              happy clients use HealthWell® daily
+              happy clients use Wizzaid® daily
             </span>
           </motion.div>
 

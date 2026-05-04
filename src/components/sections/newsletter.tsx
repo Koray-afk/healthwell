@@ -88,7 +88,7 @@ export function Newsletter() {
                   className="mt-0.5 size-4 rounded border-border accent-primary"
                 />
                 <span>
-                  I agree with HealthWell{" "}
+                  I agree with Wizzaid{" "}
                   <a href="/privacy-policy" className="underline">
                     Policies
                   </a>

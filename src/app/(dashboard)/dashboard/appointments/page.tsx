@@ -23,7 +23,7 @@ const appointments = [
     doctor: "Dr. Helena Rivera",
     type: "In-person",
     when: "Jul 02, 2024 · 09:15 AM",
-    location: "HealthWell HQ Clinic",
+    location: "Wizzaid HQ Clinic",
     status: "pending",
   },
 ];

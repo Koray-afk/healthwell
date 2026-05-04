@@ -9,23 +9,23 @@ import { cn } from "@/lib/utils";
 
 const items = [
   {
-    q: "What is HealthWell and how does it work?",
-    a: "HealthWell is a comprehensive healthcare app designed to help you manage your health and wellness. It offers features like health education, community forums, wellness challenges, appointment scheduling, and telemedicine consultations. Sign up, choose your plan, and start exploring tools tailored to your needs.",
+    q: "What is Wizzaid and how does it work?",
+    a: "Wizzaid is a comprehensive healthcare app designed to help you manage your health and wellness. It offers features like health education, community forums, wellness challenges, appointment scheduling, and telemedicine consultations. Sign up, choose your plan, and start exploring tools tailored to your needs.",
   },
   {
-    q: "How do I schedule an appointment through HealthWell?",
+    q: "How do I schedule an appointment through Wizzaid?",
     a: "Open the Appointments tab, choose your provider, pick an available time slot, and confirm. You'll receive reminders by email and push notification.",
   },
   {
-    q: "Is my health data secure with HealthWell?",
+    q: "Is my health data secure with Wizzaid?",
     a: "Yes — all data is encrypted in transit and at rest. We follow industry-standard security practices and you control sharing per provider.",
   },
   {
-    q: "Can I access HealthWell on multiple devices?",
+    q: "Can I access Wizzaid on multiple devices?",
     a: "Absolutely. Sign in on web, iOS, and Android — your data syncs in real time.",
   },
   {
-    q: "What kind of support does HealthWell offer?",
+    q: "What kind of support does Wizzaid offer?",
     a: "Email support on all plans, priority chat on Premium, and 24/7 VIP support on Elite.",
   },
   {

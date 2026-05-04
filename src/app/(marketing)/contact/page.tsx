@@ -83,7 +83,7 @@ export default function ContactPage() {
               <ContactCard
                 icon={Mail}
                 title="Email"
-                lines={["hello@healthwell.app", "support@healthwell.app"]}
+                  lines={["hello@wizzaid.app", "support@wizzaid.app"]}
               />
               <ContactCard
                 icon={Phone}

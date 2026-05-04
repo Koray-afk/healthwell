@@ -20,7 +20,7 @@ export default function PrivacyPage() {
         <Container className="max-w-3xl">
           <article className="space-y-6 text-pretty leading-relaxed text-foreground/90">
             <p>
-              At HealthWell, your privacy is foundational. This policy explains
+              At Wizzaid, your privacy is foundational. This policy explains
               what data we collect, why we collect it, and how you can control
               it.
             </p>
@@ -44,8 +44,8 @@ export default function PrivacyPage() {
             <h2 className="font-display text-2xl">Contact</h2>
             <p>
               Questions? Email{" "}
-              <a className="text-primary underline" href="mailto:privacy@healthwell.app">
-                privacy@healthwell.app
+              <a className="text-primary underline" href="mailto:privacy@wizzaid.app">
+                privacy@wizzaid.app
               </a>
               .
             </p>

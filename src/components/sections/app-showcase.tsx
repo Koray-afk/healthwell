@@ -27,7 +27,7 @@ export function AppShowcase() {
                   Download <span className="italic text-primary">the App</span>
                 </>
               }
-              description="Take HealthWell with you. Track vitals, book appointments, and stay connected with your care team — anywhere."
+              description="Take Wizzaid with you. Track vitals, book appointments, and stay connected with your care team — anywhere."
             />
             <div className="mt-8 flex flex-wrap gap-3">
               <Button size="lg">
