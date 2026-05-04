@@ -43,7 +43,7 @@ export function Navbar() {
       )}
     >
       <Container className="flex h-16 items-center justify-between gap-6">
-        <Logo />
+        <Logo showWord={false} />
 
         <nav className="hidden items-center gap-1 md:flex">
           {siteConfig.nav.map((item) => {
