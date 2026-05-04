@@ -42,7 +42,7 @@ export function Navbar() {
         "sticky top-0 z-50 w-full backdrop-blur-md supports-[backdrop-filter]:backdrop-blur-md",
       )}
     >
-      <Container className="flex h-16 items-center justify-between gap-6">
+      <Container className="flex h-24 items-center justify-between gap-6">
         <Logo showWord={false} />
 
         <nav className="hidden items-center gap-1 md:flex">
