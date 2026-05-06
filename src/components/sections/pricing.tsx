@@ -83,7 +83,7 @@ export function Pricing() {
         />
 
         {/* Toggle */}
-        <div className="mt-10 flex items-center justify-center gap-3">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <span className={cn("text-sm", !yearly ? "font-medium" : "text-muted-foreground")}>
             Monthly
           </span>
@@ -93,15 +93,15 @@ export function Pricing() {
             aria-checked={yearly}
             onClick={() => setYearly((v) => !v)}
             className={cn(
-              "relative h-7 w-12 rounded-full border border-border transition-colors",
+              "relative h-7 w-12 shrink-0 rounded-full border border-border transition-colors",
               yearly ? "bg-primary" : "bg-background",
             )}
           >
             <motion.span
-              animate={{ x: yearly ? 22 : 2 }}
+              animate={{ x: yearly ? 24 : 2 }}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
               className={cn(
-                "absolute top-[2px] inline-block size-5 rounded-full bg-background shadow",
+                "absolute left-0 top-[2px] inline-block size-5 rounded-full bg-background shadow",
                 yearly && "bg-primary-foreground",
               )}
             />
@@ -137,7 +137,7 @@ export function Pricing() {
                   <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                     {plan.name}
                   </p>
-                  <div className="mt-4 flex items-baseline gap-1">
+                  <div className="mt-4 flex flex-wrap items-baseline gap-x-2 gap-y-1">
                     <span className="text-2xl text-muted-foreground line-through">
                       ${(yearly ? plan.monthly : plan.monthly * 1.4).toFixed(0)}
                     </span>
@@ -148,7 +148,7 @@ export function Pricing() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -6 }}
                         transition={{ duration: 0.2 }}
-                        className="font-display text-5xl"
+                        className="font-display text-4xl lg:text-5xl"
                       >
                         ${price.toFixed(2)}
                       </motion.span>
