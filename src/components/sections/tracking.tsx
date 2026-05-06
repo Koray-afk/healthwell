@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import {
   Pill,
   Activity,
@@ -63,92 +63,46 @@ const tracks = [
 
 export function Tracking() {
   const [idx, setIdx] = React.useState(0);
-  const touchStartY = React.useRef<number | null>(null);
-  const lastGestureAt = React.useRef(0);
   const active = tracks[idx];
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const lastInteractionTime = React.useRef(0);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (Date.now() - lastInteractionTime.current < 1000) return;
+    
+    const step = 1 / tracks.length;
+    let newIdx = Math.floor(latest / step);
+    if (latest === 1) newIdx = tracks.length - 1;
+    newIdx = Math.max(0, Math.min(newIdx, tracks.length - 1));
+    
+    if (newIdx !== idx) {
+      setIdx(newIdx);
+    }
+  });
+
   const changeTrack = React.useCallback((direction: 1 | -1) => {
+    lastInteractionTime.current = Date.now();
     setIdx((v) => (v + direction + tracks.length) % tracks.length);
   }, []);
 
-  const changeTrackFromGesture = React.useCallback(
-    (direction: 1 | -1) => {
-      const now = Date.now();
-
-      if (now - lastGestureAt.current < 700) {
-        return;
-      }
-
-      lastGestureAt.current = now;
-      setIdx((v) => {
-        if (direction === 1) {
-          return Math.min(v + 1, tracks.length - 1);
-        }
-
-        return Math.max(v - 1, 0);
-      });
-    },
-    [],
-  );
-  const canStepFromGesture = React.useCallback(
-    (direction: 1 | -1) =>
-      direction === 1 ? idx < tracks.length - 1 : idx > 0,
-    [idx],
-  );
+  const setTrack = React.useCallback((i: number) => {
+    lastInteractionTime.current = Date.now();
+    setIdx(i);
+  }, []);
 
   return (
-    <Section
-      id="features-tracking"
-      className="bg-secondary/30"
-      onWheel={(event) => {
-        if (Math.abs(event.deltaY) < 24) {
-          return;
-        }
-
-        const direction = event.deltaY > 0 ? 1 : -1;
-
-        if (!canStepFromGesture(direction)) {
-          return;
-        }
-
-        event.preventDefault();
-        changeTrackFromGesture(direction);
-      }}
-      onTouchStart={(event) => {
-        touchStartY.current = event.touches[0]?.clientY ?? null;
-      }}
-      onTouchMove={(event) => {
-        if (touchStartY.current === null) {
-          return;
-        }
-
-        const currentY = event.touches[0]?.clientY;
-
-        if (currentY === undefined) {
-          touchStartY.current = null;
-          return;
-        }
-
-        const distance = touchStartY.current - currentY;
-
-        if (Math.abs(distance) < 40) {
-          return;
-        }
-
-        const direction = distance > 0 ? 1 : -1;
-
-        if (!canStepFromGesture(direction)) {
-          return;
-        }
-
-        event.preventDefault();
-        touchStartY.current = currentY;
-        changeTrackFromGesture(direction);
-      }}
-      onTouchEnd={() => {
-        touchStartY.current = null;
-      }}
-    >
-      <Container>
+    <div ref={containerRef} className="relative bg-secondary/30 lg:h-[500vh]">
+      <div className="w-full lg:sticky lg:top-0 lg:flex lg:h-screen lg:items-center lg:justify-center lg:overflow-hidden">
+        <Section
+          id="features-tracking"
+          className="w-full bg-transparent lg:py-12"
+        >
+          <Container>
         <SectionHeading
           eyebrow="Features"
           title={
@@ -170,7 +124,7 @@ export function Tracking() {
                 <li key={t.id}>
                   <button
                     type="button"
-                    onClick={() => setIdx(i)}
+                    onClick={() => setTrack(i)}
                     className={cn(
                       "group flex w-full items-start gap-4 rounded-2xl border p-4 text-left transition-all",
                       selected
@@ -206,13 +160,13 @@ export function Tracking() {
           <div className="relative mx-auto h-[560px] w-[280px] shrink-0 rounded-[3rem] border-[10px] border-foreground/90 bg-foreground/90 shadow-2xl">
             <div className="absolute left-1/2 top-2 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-foreground" />
             <div className="relative h-full w-full overflow-hidden rounded-[2.2rem] bg-muted">
-              <AnimatePresence mode="wait">
+              <AnimatePresence>
                 <motion.div
                   key={active.id}
                   initial={{ opacity: 0, scale: 1.05 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute inset-0"
                 >
                   <Image
@@ -255,7 +209,9 @@ export function Tracking() {
             </div>
           </div>
         </div>
-      </Container>
-    </Section>
+          </Container>
+        </Section>
+      </div>
+    </div>
   );
 }
