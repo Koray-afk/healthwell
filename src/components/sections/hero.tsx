@@ -35,7 +35,7 @@ const integrations = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pb-12 pt-16 sm:pt-20 lg:pb-20 lg:pt-24">
+    <section className="relative overflow-hidden pb-6 pt-16 sm:pt-20 lg:pb-10 lg:pt-24">
       {/* Decorative gradient blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-[-10%] h-[60vh] w-[80vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--accent),transparent_70%)] opacity-60 blur-3xl" />
@@ -119,7 +119,7 @@ export function Hero() {
 
           <motion.div
             variants={fadeUp}
-            className="relative mt-16 w-[90vw] max-w-[90rem] overflow-hidden rounded-[2rem] px-6 py-6 sm:px-10"
+            className="relative mt-16 w-[90vw] max-w-[80rem] overflow-hidden rounded-[2rem] px-6 py-6 sm:px-10"
           >
             <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-background to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-background to-transparent" />
