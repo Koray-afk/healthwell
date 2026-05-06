@@ -35,7 +35,7 @@ const integrations = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pb-20 pt-16 sm:pt-20 lg:pb-32 lg:pt-24">
+    <section className="relative overflow-hidden pb-12 pt-16 sm:pt-20 lg:pb-20 lg:pt-24">
       {/* Decorative gradient blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-[-10%] h-[60vh] w-[80vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--accent),transparent_70%)] opacity-60 blur-3xl" />
