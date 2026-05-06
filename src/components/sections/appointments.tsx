@@ -11,7 +11,36 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { fadeUp, stagger, viewport } from "@/lib/motion";
+import { stagger, viewport } from "@/lib/motion";
+
+const tileVariants = {
+  hidden: {
+    opacity: 0,
+    y: 28,
+    scale: 0.98,
+    filter: "blur(6px)",
+  },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.75,
+      delay: i * 0.08,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+const mockVariants = {
+  hidden: { opacity: 0, y: 14 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 const tiles = [
   {
@@ -71,27 +100,38 @@ export function Appointments() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          variants={stagger(0.06)}
+          variants={stagger(0.04, 0.08)}
           className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {tiles.map((t) => {
+          {tiles.map((t, i) => {
             const Icon = t.icon;
             return (
               <motion.article
                 key={t.title}
-                variants={fadeUp}
-                className="group relative flex flex-col gap-4 overflow-hidden rounded-3xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+                custom={i}
+                variants={tileVariants}
+                whileHover={{ y: -6, scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 260, damping: 22 }}
+                className="group relative flex flex-col gap-4 overflow-hidden rounded-3xl border border-border bg-card p-6 transition-all hover:border-primary/40 hover:shadow-lg"
               >
                 <div className="flex items-start justify-between">
-                  <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={viewport}
+                    transition={{ duration: 0.5, delay: 0.12 + i * 0.06 }}
+                    className="inline-flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary"
+                  >
                     <Icon className="size-5" />
-                  </span>
+                  </motion.span>
                 </div>
-                <div>
+                <motion.div variants={mockVariants}>
                   <h3 className="font-display text-2xl">{t.title}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">{t.description}</p>
-                </div>
-                <div className="mt-2 flex-1">{t.body}</div>
+                </motion.div>
+                <motion.div variants={mockVariants} className="mt-2 flex-1">
+                  {t.body}
+                </motion.div>
               </motion.article>
             );
           })}
