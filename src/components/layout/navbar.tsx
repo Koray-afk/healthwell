@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/layout/logo";
@@ -75,15 +75,12 @@ export function Navbar() {
           })}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+        <div className="flex items-center gap-3">
+          <Button asChild variant="outline" size="sm">
             <Link href="/sign-in">Sign in</Link>
           </Button>
-          <Button asChild size="lg" className="hidden sm:inline-flex">
-            <Link href="/dashboard">
-              Dashboard
-              <ArrowUpRight />
-            </Link>
+          <Button asChild size="sm" className="hidden sm:inline-flex">
+            <Link href="/sign-up">Get Started</Link>
           </Button>
           <Button
             variant="outline"
