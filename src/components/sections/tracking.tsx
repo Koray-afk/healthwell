@@ -63,15 +63,91 @@ const tracks = [
 
 export function Tracking() {
   const [idx, setIdx] = React.useState(0);
+  const touchStartY = React.useRef<number | null>(null);
+  const lastGestureAt = React.useRef(0);
   const active = tracks[idx];
-
-  React.useEffect(() => {
-    const t = setInterval(() => setIdx((v) => (v + 1) % tracks.length), 5000);
-    return () => clearInterval(t);
+  const changeTrack = React.useCallback((direction: 1 | -1) => {
+    setIdx((v) => (v + direction + tracks.length) % tracks.length);
   }, []);
 
+  const changeTrackFromGesture = React.useCallback(
+    (direction: 1 | -1) => {
+      const now = Date.now();
+
+      if (now - lastGestureAt.current < 700) {
+        return;
+      }
+
+      lastGestureAt.current = now;
+      setIdx((v) => {
+        if (direction === 1) {
+          return Math.min(v + 1, tracks.length - 1);
+        }
+
+        return Math.max(v - 1, 0);
+      });
+    },
+    [],
+  );
+  const canStepFromGesture = React.useCallback(
+    (direction: 1 | -1) =>
+      direction === 1 ? idx < tracks.length - 1 : idx > 0,
+    [idx],
+  );
+
   return (
-    <Section id="features-tracking" className="bg-secondary/30">
+    <Section
+      id="features-tracking"
+      className="bg-secondary/30"
+      onWheel={(event) => {
+        if (Math.abs(event.deltaY) < 24) {
+          return;
+        }
+
+        const direction = event.deltaY > 0 ? 1 : -1;
+
+        if (!canStepFromGesture(direction)) {
+          return;
+        }
+
+        event.preventDefault();
+        changeTrackFromGesture(direction);
+      }}
+      onTouchStart={(event) => {
+        touchStartY.current = event.touches[0]?.clientY ?? null;
+      }}
+      onTouchMove={(event) => {
+        if (touchStartY.current === null) {
+          return;
+        }
+
+        const currentY = event.touches[0]?.clientY;
+
+        if (currentY === undefined) {
+          touchStartY.current = null;
+          return;
+        }
+
+        const distance = touchStartY.current - currentY;
+
+        if (Math.abs(distance) < 40) {
+          return;
+        }
+
+        const direction = distance > 0 ? 1 : -1;
+
+        if (!canStepFromGesture(direction)) {
+          return;
+        }
+
+        event.preventDefault();
+        touchStartY.current = currentY;
+        changeTrackFromGesture(direction);
+      }}
+      onTouchEnd={() => {
+        touchStartY.current = null;
+      }}
+    >
       <Container>
         <SectionHeading
           eyebrow="Features"
@@ -160,14 +236,14 @@ export function Tracking() {
             <p className="text-muted-foreground">{active.description}</p>
             <div className="mt-4 flex items-center gap-2">
               <button
-                onClick={() => setIdx((v) => (v - 1 + tracks.length) % tracks.length)}
+                onClick={() => changeTrack(-1)}
                 className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background hover:bg-secondary"
                 aria-label="Previous"
               >
                 <ChevronLeft className="size-4" />
               </button>
               <button
-                onClick={() => setIdx((v) => (v + 1) % tracks.length)}
+                onClick={() => changeTrack(1)}
                 className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background hover:bg-secondary"
                 aria-label="Next"
               >
