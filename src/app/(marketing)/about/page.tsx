@@ -16,7 +16,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
-      <Section className="pb-0 pt-16 sm:pt-20">
+      <Section className="pb-0 pt-10 sm:pt-20">
         <Container>
           <SectionHeading
             eyebrow="About"
