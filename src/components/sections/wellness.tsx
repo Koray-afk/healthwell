@@ -62,7 +62,7 @@ export function Wellness() {
             <motion.div
               key={c.title}
               variants={fadeUp}
-              className={`group relative overflow-hidden rounded-3xl ${i === 0 ? "col-span-2 lg:col-span-2 lg:row-span-2" : ""}`}
+              className="group relative overflow-hidden rounded-3xl"
             >
               <Link href="/features" className="block">
                 <div className="relative aspect-[4/5] w-full">

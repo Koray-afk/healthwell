@@ -18,7 +18,6 @@ const tiles = [
     title: "Appointment Scheduling",
     description: "Book appointments with healthcare providers in seconds.",
     icon: CalendarDays,
-    span: "lg:col-span-2",
     body: <CalendarMock />,
   },
   {
@@ -37,7 +36,6 @@ const tiles = [
     title: "Secure Messaging",
     description: "Communicate securely with your care team.",
     icon: MessageSquare,
-    span: "lg:col-span-2",
     body: <ChatMock />,
   },
   {
@@ -50,7 +48,6 @@ const tiles = [
     title: "Care Coordination",
     description: "Coordinate between multiple providers.",
     icon: Network,
-    span: "lg:col-span-2",
     body: <TimelineMock />,
   },
 ];
@@ -83,7 +80,7 @@ export function Appointments() {
               <motion.article
                 key={t.title}
                 variants={fadeUp}
-                className={`group relative flex flex-col gap-4 overflow-hidden rounded-3xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg ${t.span ?? ""}`}
+                className="group relative flex flex-col gap-4 overflow-hidden rounded-3xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
               >
                 <div className="flex items-start justify-between">
                   <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
