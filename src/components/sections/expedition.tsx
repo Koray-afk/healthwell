@@ -32,7 +32,7 @@ const gallery = [
 export function Expedition() {
   return (
     <Section id="about" className="bg-background py-16 sm:py-20 lg:py-24">
-      <Container>
+      <Container className="max-w-[80rem]">
         <motion.div
           initial="hidden"
           whileInView="show"
