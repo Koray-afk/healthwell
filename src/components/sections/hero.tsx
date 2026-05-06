@@ -119,7 +119,7 @@ export function Hero() {
 
           <motion.div
             variants={fadeUp}
-            className="relative mt-10 w-full overflow-hidden rounded-[2rem] border border-border bg-background/95 px-4 py-4 shadow-[0_18px_60px_rgba(15,23,42,0.08)] backdrop-blur sm:px-6"
+            className="relative mt-10 w-full overflow-hidden rounded-[2rem] px-4 py-4 sm:px-6"
           >
             <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-background to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-background to-transparent" />
