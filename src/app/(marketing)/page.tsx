@@ -19,12 +19,12 @@ export default function Home() {
       <Stats />
       <Tracking />
       <Appointments />
+      <AppShowcase />
       <Wellness />
       <Testimonials />
       <Pricing />
       <Faq />
       <Articles />
-      <AppShowcase />
       <Newsletter />
     </>
   );

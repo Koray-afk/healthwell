@@ -63,7 +63,7 @@ export function Hero() {
           >
             Improve Your Health{" "}
             <span className="italic text-primary">with</span>{" "}
-            <span className="whitespace-nowrap">Wizzaid®</span>
+            <span className="whitespace-nowrap">Wizzaid</span>
           </motion.h1>
 
           <motion.p
