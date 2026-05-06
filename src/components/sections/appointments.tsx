@@ -50,6 +50,7 @@ const tiles = [
     title: "Care Coordination",
     description: "Coordinate between multiple providers.",
     icon: Network,
+    span: "lg:col-span-2",
     body: <TimelineMock />,
   },
 ];
