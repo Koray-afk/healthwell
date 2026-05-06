@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { fadeUp, stagger, viewport } from "@/lib/motion";
+import { fadeUp, stagger } from "@/lib/motion";
 
 const avatars = [
   "https://framerusercontent.com/images/4wjZwfbCu9WSrGLaPidnqyFVOiY.png",
@@ -32,23 +32,6 @@ const integrations = [
   { label: "Samsung Health" },
 ];
 
-const highlights = [
-  {
-    title: "Personalized guidance",
-    description:
-      "Tailored insights that adapt to your daily routines and goals.",
-  },
-  {
-    title: "Secure by default",
-    description:
-      "End-to-end safeguards so your health data stays protected.",
-  },
-  {
-    title: "Always in sync",
-    description:
-      "Connect your favorite devices for a unified wellness view.",
-  },
-];
 
 export function Hero() {
   return (
@@ -162,31 +145,6 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={viewport}
-          variants={stagger(0.08)}
-          className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {highlights.map((item) => (
-            <motion.div
-              key={item.title}
-              variants={fadeUp}
-              className="rounded-3xl border border-border bg-card/80 p-6 text-left shadow-sm"
-            >
-              <div className="flex items-center gap-3">
-                <span className="inline-block size-2.5 rounded-full bg-primary/60" />
-                <h3 className="text-lg font-semibold text-foreground">
-                  {item.title}
-                </h3>
-              </div>
-              <p className="mt-3 text-sm text-muted-foreground">
-                {item.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
       </Container>
     </section>
   );
