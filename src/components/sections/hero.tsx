@@ -59,10 +59,10 @@ export function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="font-display mt-6 text-balance text-5xl leading-[1.02] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+            className="font-display mt-6 text-balance text-5xl leading-[1.02] text-premium-gradient sm:text-6xl md:text-7xl lg:text-[5.5rem]"
           >
             Improve Your Health{" "}
-            <span className="italic text-primary">with</span>{" "}
+            <span className="italic">with</span>{" "}
             <span className="whitespace-nowrap">Wizzaid</span>
           </motion.h1>
 

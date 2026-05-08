@@ -10,7 +10,7 @@ export function Logo({ className, showWord = true }: { className?: string; showW
         className={cn("relative block h-12 w-52 shrink-0 md:w-60", className)}
       >
         <Image
-          src="/LOGO%20SIDEWAYS.png"
+          src="/LOGO%20SIDEWAYS.svg"
           alt="Wizzaid"
           fill
           sizes="288px"
@@ -32,7 +32,7 @@ export function Logo({ className, showWord = true }: { className?: string; showW
         <Image src="/LOGO%20ONLY.svg" alt="Wizzaid" width={96} height={96} />
       </div>
       {showWord ? (
-        <span className="text-2xl font-semibold">Wizzaid<span className="text-primary">®</span></span>
+        <span className="text-2xl font-semibold text-premium-gradient">Wizzaid®</span>
       ) : null}
     </Link>
   );

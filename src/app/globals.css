@@ -135,6 +135,21 @@
   }
 }
 
+@layer utilities {
+  .text-premium-gradient {
+    background-image: linear-gradient(
+      to bottom,
+      #020817,
+      #1e3a8a,
+      #2563eb
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
 @utility container-page {
   @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
 }

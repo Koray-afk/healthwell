@@ -2,13 +2,18 @@
 <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 739.83 768">
   <!-- Generator: Adobe Illustrator 29.8.2, SVG Export Plug-In . SVG Version: 2.1.1 Build 3)  -->
   <defs>
+    <linearGradient id="premiumGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#020817" />
+      <stop offset="50%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
     <style>
       .st0 {
         fill: #fff;
       }
 
       .st1 {
-        fill: #0254ec;
+        fill: url(#premiumGradient);
       }
     </style>
   </defs>
