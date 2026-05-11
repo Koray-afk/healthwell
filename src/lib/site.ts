@@ -12,12 +12,11 @@ export const siteConfig = {
     linkedin: "https://linkedin.com/company/wizzaid",
   },
   nav: [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Features", href: "/features" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Articles", href: "/articles" },
-    { label: "Contact", href: "/contact" },
+    { label: "Platform", href: "/platform", hasDropdown: true },
+    { label: "About", href: "/about", hasDropdown: true },
+    { label: "Resources", href: "/resources", hasDropdown: true },
+    { label: "Contact", href: "/contact", hasDropdown: false },
+    { label: "Features", href: "/features", hasDropdown: false },
   ],
   footer: {
     menu: [

@@ -35,11 +35,22 @@ const integrations = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pb-6 pt-16 sm:pt-20 lg:pb-10 lg:pt-24">
-      {/* Decorative gradient blobs */}
+    <section className="relative overflow-hidden pb-0 pt-16 sm:pt-20 lg:pt-24">
+      {/* Animated gradient mesh background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-[-10%] h-[60vh] w-[80vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--accent),transparent_70%)] opacity-60 blur-3xl" />
         <div className="absolute right-[-10%] top-1/3 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,var(--primary),transparent_70%)] opacity-20 blur-3xl" />
+        {/* Extra floating orbs */}
+        <motion.div
+          animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+          className="absolute left-[10%] top-[20%] h-48 w-48 rounded-full bg-[radial-gradient(closest-side,#3b82f6,transparent_70%)] opacity-10 blur-3xl"
+        />
+        <motion.div
+          animate={{ y: [0, 15, 0], x: [0, -12, 0] }}
+          transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
+          className="absolute right-[15%] top-[30%] h-56 w-56 rounded-full bg-[radial-gradient(closest-side,#8b5cf6,transparent_70%)] opacity-10 blur-3xl"
+        />
       </div>
 
       <Container>
@@ -49,21 +60,25 @@ export function Hero() {
           variants={stagger(0.1)}
           className="flex flex-col items-center text-center"
         >
+          {/* Pill badge */}
           <motion.span
             variants={fadeUp}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-4 py-1.5 text-xs font-medium text-secondary-foreground shadow-sm"
+            className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-medium text-primary shadow-sm backdrop-blur-sm"
           >
-            <Sparkles className="size-3.5 text-primary" />
+            <Sparkles className="size-3.5" />
             Empowering well-being, one habit at a time
           </motion.span>
 
+          {/* Headline with mixed weight + gradient */}
           <motion.h1
             variants={fadeUp}
-            className="font-display mt-6 text-balance text-5xl leading-[1.02] text-premium-gradient sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+            className="font-display mt-8 text-balance text-5xl leading-[1.02] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
           >
-            Improve Your Health{" "}
-            <span className="italic">with</span>{" "}
-            <span className="whitespace-nowrap">Wizzaid</span>
+            <span className="text-foreground">Improve Your Health</span>{" "}
+            <span className="italic text-primary/70">with</span>{" "}
+            <span className="whitespace-nowrap bg-gradient-to-r from-primary via-[#6366f1] to-primary bg-clip-text text-transparent">
+              Wizzaid
+            </span>
           </motion.h1>
 
           <motion.p
@@ -75,21 +90,23 @@ export function Hero() {
             happier life.
           </motion.p>
 
+          {/* CTA Buttons */}
           <motion.div
             variants={fadeUp}
             className="mt-8 flex flex-wrap items-center justify-center gap-3"
           >
-            <Button asChild size="lg">
+            <Button asChild size="lg" className="rounded-full px-7 shadow-lg shadow-primary/20">
               <Link href="/sign-up">
                 Get Started
                 <ArrowRight />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="outline" size="lg" className="rounded-full px-7">
               <Link href="/features">Find More</Link>
             </Button>
           </motion.div>
 
+          {/* Social proof */}
           <motion.div
             variants={fadeUp}
             className="mt-8 flex items-center gap-3 text-sm text-muted-foreground"
@@ -98,14 +115,14 @@ export function Hero() {
               {avatars.map((src, i) => (
                 <span
                   key={src}
-                  className="relative inline-block size-8 overflow-hidden rounded-full border-2 border-background"
+                  className="relative inline-block size-9 overflow-hidden rounded-full border-2 border-background shadow-sm"
                   style={{ zIndex: avatars.length - i }}
                 >
                   <Image
                     src={src}
                     alt=""
                     fill
-                    sizes="32px"
+                    sizes="36px"
                     className="object-cover"
                   />
                 </span>
@@ -116,35 +133,32 @@ export function Hero() {
               happy clients use Wizzaid® daily
             </span>
           </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            className="relative mt-16 w-[90vw] max-w-[80rem] overflow-hidden rounded-[2rem] px-6 py-6 sm:px-10"
-          >
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-linear-to-r from-background to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-linear-to-l from-background to-transparent" />
-            <motion.div
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ repeat: Infinity, duration: 28, ease: "linear" }}
-              className="flex w-max gap-3"
-            >
-              {[...integrations, ...integrations].map((item, index) => (
-                <span
-                  key={`${item.label}-${index}`}
-                  className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-2 text-sm font-medium text-foreground shadow-sm"
-                >
-                  {item.label}
-                  {item.soon ? (
-                    <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                      soon
-                    </span>
-                  ) : null}
-                </span>
-              ))}
-            </motion.div>
-          </motion.div>
         </motion.div>
+      </Container>
 
+      {/* === Integration marquee — floating dark pills === */}
+      <Container className="mt-16">
+        <div className="relative overflow-hidden py-5">
+        <motion.div
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ repeat: Infinity, duration: 28, ease: "linear" }}
+          className="flex w-max gap-3"
+        >
+          {[...integrations, ...integrations].map((item, index) => (
+            <span
+              key={`${item.label}-${index}`}
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#09090b] px-5 py-2 text-sm font-medium text-white"
+            >
+              {item.label}
+              {item.soon ? (
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[rgba(255,255,255,0.4)]">
+                  soon
+                </span>
+              ) : null}
+            </span>
+          ))}
+        </motion.div>
+        </div>
       </Container>
     </section>
   );

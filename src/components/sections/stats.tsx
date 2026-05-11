@@ -9,7 +9,7 @@ import {
   animate,
 } from "framer-motion";
 import { Container } from "@/components/ui/container";
-import { Section, SectionHeading } from "@/components/ui/section";
+import { Section } from "@/components/ui/section";
 import { fadeUp, stagger, viewport } from "@/lib/motion";
 
 const stats = [
@@ -55,37 +55,43 @@ export function Stats() {
   return (
     <Section id="stats" className="py-16 sm:py-20">
       <Container>
-        <SectionHeading
-          eyebrow="Statistics"
-          title={
-            <>
-              Users <span className="italic text-primary">&</span> Engagement
-            </>
-          }
-          description="Through innovative tools and a supportive community, our users have achieved over 100,000 health goals — driving positive change one person at a time."
-        />
+        <div className="overflow-hidden rounded-[2.5rem] bg-[#09090b] px-8 py-14 sm:px-12 sm:py-20">
+          {/* Heading */}
+          <div className="flex flex-col items-center gap-4 text-center">
+            <span className="inline-flex items-center rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.06)] px-3 py-1 text-xs font-medium uppercase tracking-widest text-[rgba(255,255,255,0.7)]">
+              Statistics
+            </span>
+            <h2 className="font-display text-balance text-4xl leading-[1.05] text-white sm:text-5xl lg:text-6xl">
+              Users <span className="italic text-[#3b82f6]">&</span> Engagement
+            </h2>
+            <p className="mx-auto max-w-2xl text-pretty text-base text-[rgba(255,255,255,0.55)] sm:text-lg">
+              Through innovative tools and a supportive community, our users have achieved over 100,000 health goals — driving positive change one person at a time.
+            </p>
+          </div>
 
-        <motion.ul
-          initial="hidden"
-          whileInView="show"
-          viewport={viewport}
-          variants={stagger(0.08)}
-          className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5"
-        >
-          {stats.map((s) => (
-            <motion.li
-              key={s.label}
-              variants={fadeUp}
-              className="group relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-secondary/40 to-background p-6 text-left transition-colors hover:border-primary/40"
-            >
-              <span className="font-display text-5xl text-primary sm:text-6xl">
-                <Counter to={s.value} format={s.format} prefix={s.prefix} suffix={s.suffix} />
-              </span>
-              <p className="mt-3 text-sm text-muted-foreground">{s.label}</p>
-              <div className="pointer-events-none absolute -right-8 -top-8 size-24 rounded-full bg-primary/5 blur-2xl transition-opacity group-hover:opacity-80" />
-            </motion.li>
-          ))}
-        </motion.ul>
+          {/* Stats grid */}
+          <motion.ul
+            initial="hidden"
+            whileInView="show"
+            viewport={viewport}
+            variants={stagger(0.08)}
+            className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5"
+          >
+            {stats.map((s) => (
+              <motion.li
+                key={s.label}
+                variants={fadeUp}
+                className="group relative overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] p-6 text-left transition-colors hover:border-[#3b82f6]/40"
+              >
+                <span className="font-display text-5xl text-[#3b82f6] sm:text-6xl">
+                  <Counter to={s.value} format={s.format} prefix={s.prefix} suffix={s.suffix} />
+                </span>
+                <p className="mt-3 text-sm text-[rgba(255,255,255,0.55)]">{s.label}</p>
+                <div className="pointer-events-none absolute -right-8 -top-8 size-24 rounded-full bg-[#3b82f6]/5 blur-2xl transition-opacity group-hover:opacity-80" />
+              </motion.li>
+            ))}
+          </motion.ul>
+        </div>
       </Container>
     </Section>
   );

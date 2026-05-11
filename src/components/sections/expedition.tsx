@@ -97,7 +97,7 @@ export function Expedition() {
     <Section id="about" className="bg-background py-16 sm:py-20 lg:py-24">
       <div ref={sectionRef} className="relative">
         <div style={{ height: sectionHeight ? `${sectionHeight}px` : "200vh" }}>
-          <Container className="sticky top-24 max-w-[80rem]">
+          <Container className="sticky top-24">
             <motion.div
               initial="hidden"
               whileInView="show"

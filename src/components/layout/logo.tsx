@@ -14,7 +14,7 @@ export function Logo({ className, showWord = true }: { className?: string; showW
           alt="Wizzaid"
           fill
           sizes="288px"
-          className="object-contain"
+          className="object-contain object-left"
           priority
         />
       </Link>

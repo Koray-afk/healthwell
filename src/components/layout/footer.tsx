@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
-import { Logo } from "@/components/layout/logo";
 import { siteConfig } from "@/lib/site";
 
 function TwitterIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -41,70 +41,75 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-24 border-t border-border bg-secondary/30">
-      <Container className="py-16">
-        <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <Logo />
-            <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-              {siteConfig.description}
-            </p>
-            <div className="mt-6 flex items-center gap-3">
-              <SocialLink href={siteConfig.links.twitter} label="Twitter">
-                <TwitterIcon className="size-4" />
-              </SocialLink>
-              <SocialLink href={siteConfig.links.linkedin} label="LinkedIn">
-                <LinkedinIcon className="size-4" />
-              </SocialLink>
-              <SocialLink href={siteConfig.links.instagram} label="Instagram">
-                <InstagramIcon className="size-4" />
-              </SocialLink>
+    <footer className="mt-24 bg-[#09090b]">
+      <Container className="py-14 sm:py-16">
+          <div className="grid gap-12 md:grid-cols-12">
+            <div className="md:col-span-5">
+              <Link href="/" className="group inline-flex items-center gap-3 font-display text-xl tracking-tight">
+                <div className="relative inline-flex size-16 items-center justify-center transition-transform group-hover:rotate-[-6deg]">
+                  <Image src="/LOGO%20ONLY.svg" alt="Wizzaid" width={96} height={96} />
+                </div>
+                <span className="text-2xl font-semibold bg-gradient-to-b from-white to-[#3b82f6] bg-clip-text text-transparent">Wizzaid</span>
+              </Link>
+              <p className="mt-4 max-w-sm text-sm text-[rgba(255,255,255,0.55)]">
+                {siteConfig.description}
+              </p>
+              <div className="mt-6 flex items-center gap-3">
+                <SocialLink href={siteConfig.links.twitter} label="Twitter">
+                  <TwitterIcon className="size-4" />
+                </SocialLink>
+                <SocialLink href={siteConfig.links.linkedin} label="LinkedIn">
+                  <LinkedinIcon className="size-4" />
+                </SocialLink>
+                <SocialLink href={siteConfig.links.instagram} label="Instagram">
+                  <InstagramIcon className="size-4" />
+                </SocialLink>
+              </div>
+            </div>
+
+            <div className="md:col-span-3">
+              <h4 className="text-xs font-semibold uppercase tracking-widest text-[rgba(255,255,255,0.45)]">
+                Menu
+              </h4>
+              <ul className="mt-4 space-y-3 text-sm">
+                {siteConfig.footer.menu.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-[rgba(255,255,255,0.7)] transition-colors hover:text-white"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="md:col-span-4">
+              <h4 className="text-xs font-semibold uppercase tracking-widest text-[rgba(255,255,255,0.45)]">
+                Useful Links
+              </h4>
+              <ul className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                {siteConfig.footer.useful.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-[rgba(255,255,255,0.7)] transition-colors hover:text-white"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          <div className="md:col-span-3">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Menu
-            </h4>
-            <ul className="mt-4 space-y-3 text-sm">
-              {siteConfig.footer.menu.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-foreground/80 transition-colors hover:text-foreground"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-[rgba(255,255,255,0.08)] pt-8 text-xs text-[rgba(255,255,255,0.4)] sm:flex-row sm:items-center">
+            <p>
+              © {year} {siteConfig.brand}. All rights reserved.
+            </p>
+            <p>Crafted with care for healthier living.</p>
           </div>
-
-          <div className="md:col-span-4">
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Useful Links
-            </h4>
-            <ul className="mt-4 grid grid-cols-2 gap-3 text-sm">
-              {siteConfig.footer.useful.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-foreground/80 transition-colors hover:text-foreground"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-border pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center">
-          <p>
-            © {year} {siteConfig.brand}. All rights reserved.
-          </p>
-          <p>Crafted with care for healthier living.</p>
-        </div>
       </Container>
     </footer>
   );
@@ -125,7 +130,7 @@ function SocialLink({
       aria-label={label}
       target="_blank"
       rel="noreferrer"
-      className="inline-flex size-9 items-center justify-center rounded-full border border-border bg-background text-foreground transition-colors hover:border-primary hover:text-primary"
+      className="inline-flex size-9 items-center justify-center rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] text-[rgba(255,255,255,0.7)] transition-colors hover:border-[#3b82f6] hover:text-[#3b82f6]"
     >
       {children}
     </Link>
