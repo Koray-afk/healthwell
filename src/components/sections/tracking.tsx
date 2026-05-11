@@ -107,7 +107,7 @@ export function Tracking() {
           eyebrow="Features"
           title={
             <>
-              Health Tracking <span className="italic text-primary">&</span>{" "}
+              Health Tracking <span className="font-sans text-primary">&</span>{" "}
               Monitoring
             </>
           }
@@ -157,8 +157,8 @@ export function Tracking() {
           </ul>
 
           {/* iPhone mockup */}
-          <div className="relative mx-auto h-[560px] w-[280px] shrink-0 rounded-[3rem] border-[10px] border-foreground/90 bg-foreground/90 shadow-2xl">
-            <div className="absolute left-1/2 top-2 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-foreground" />
+          <div className="relative mx-auto h-[560px] w-[280px] shrink-0 rounded-[3rem] border-[10px] border-[#1c1c1e] bg-[#1c1c1e] shadow-2xl">
+            <div className="absolute left-1/2 top-2 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-[#1c1c1e]" />
             <div className="relative h-full w-full overflow-hidden rounded-[2.2rem] bg-muted">
               <AnimatePresence>
                 <motion.div

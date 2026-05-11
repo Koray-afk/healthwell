@@ -43,8 +43,8 @@ export function AppShowcase() {
 
           {/* Phone with floating cards */}
           <div className="relative mx-auto h-[600px] w-full max-w-md">
-            <div className="relative mx-auto h-[600px] w-[300px] rounded-[3rem] border-[10px] border-foreground/90 bg-foreground/90 shadow-2xl">
-              <div className="absolute left-1/2 top-2 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-foreground" />
+            <div className="relative mx-auto h-[600px] w-[300px] rounded-[3rem] border-[10px] border-[#1c1c1e] bg-[#1c1c1e] shadow-2xl">
+              <div className="absolute left-1/2 top-2 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-[#1c1c1e]" />
               <div className="relative flex h-full w-full flex-col gap-3 overflow-hidden rounded-[2.2rem] bg-gradient-to-br from-secondary to-accent p-4 pt-10">
                 <div className="flex items-center gap-3 rounded-2xl bg-background/90 p-3 shadow-sm">
                   <span className="size-9 rounded-full bg-primary/20" />

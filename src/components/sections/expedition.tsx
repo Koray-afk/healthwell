@@ -103,7 +103,7 @@ export function Expedition() {
               whileInView="show"
               viewport={viewport}
               variants={stagger(0.1)}
-              className="overflow-hidden rounded-[2.5rem] border border-border bg-blue-50 shadow-sm"
+              className="overflow-hidden rounded-[2.5rem] border border-border bg-zinc-50 shadow-sm dark:bg-card"
             >
               <div className="grid gap-8 px-8 py-10 sm:px-12 sm:py-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
                 <motion.h2

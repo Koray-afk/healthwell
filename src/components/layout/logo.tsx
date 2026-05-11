@@ -14,7 +14,7 @@ export function Logo({ className, showWord = true }: { className?: string; showW
           alt="Wizzaid"
           fill
           sizes="288px"
-          className="object-contain object-left"
+          className="object-contain object-left dark:brightness-0 dark:invert"
           priority
         />
       </Link>
@@ -29,7 +29,7 @@ export function Logo({ className, showWord = true }: { className?: string; showW
           "size-16",
         )}
       >
-        <Image src="/LOGO%20ONLY.svg" alt="Wizzaid" width={96} height={96} />
+        <Image src="/LOGO%20ONLY.svg" alt="Wizzaid" width={96} height={96} className="dark:brightness-0 dark:invert" />
       </div>
       {showWord ? (
         <span className="text-2xl font-semibold text-premium-gradient">Wizzaid®</span>

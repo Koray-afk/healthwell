@@ -45,14 +45,14 @@ export function Testimonials() {
   return (
     <Section id="testimonials">
       <Container>
-        <div className="overflow-hidden rounded-[2.5rem] bg-[#09090b] px-8 py-14 sm:px-12 sm:py-20">
+        <div className="overflow-hidden rounded-[2.5rem] bg-dark-section px-8 py-14 sm:px-12 sm:py-20">
           {/* Heading */}
           <div className="flex flex-col items-center gap-4 text-center">
-            <span className="inline-flex items-center rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.06)] px-3 py-1 text-xs font-medium uppercase tracking-widest text-[rgba(255,255,255,0.7)]">
+            <span className="inline-flex items-center rounded-full border border-dark-section-border bg-dark-section-card px-3 py-1 text-xs font-medium uppercase tracking-widest text-[rgba(255,255,255,0.7)]">
               Testimonials
             </span>
             <h2 className="font-display text-balance text-4xl leading-[1.05] text-white sm:text-5xl lg:text-6xl">
-              Voices of <span className="italic text-[#3b82f6]">Wellness</span>
+              Voices of <span className="italic text-zinc-500">Wellness</span>
             </h2>
             <p className="mx-auto max-w-2xl text-pretty text-base text-[rgba(255,255,255,0.55)] sm:text-lg">
               Dive into the inspiring stories of our thriving community.
@@ -61,8 +61,8 @@ export function Testimonials() {
 
           {/* Marquee */}
           <div className="relative mt-14 overflow-hidden">
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#09090b] to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#09090b] to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-dark-section to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-dark-section to-transparent" />
             <motion.div
               animate={{ x: ["0%", "-50%"] }}
               transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
@@ -71,9 +71,9 @@ export function Testimonials() {
               {loop.map((it, i) => (
                 <article
                   key={i}
-                  className="flex w-[340px] shrink-0 flex-col gap-4 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] p-6 sm:w-[400px]"
+                  className="flex w-[340px] shrink-0 flex-col gap-4 rounded-2xl border border-dark-section-border bg-dark-section-card p-6 sm:w-[400px]"
                 >
-                  <div className="flex gap-1 text-[#3b82f6]">
+                  <div className="flex gap-1 text-zinc-400">
                     {Array.from({ length: 5 }).map((_, j) => (
                       <Star key={j} className="size-4 fill-current" strokeWidth={0} />
                     ))}

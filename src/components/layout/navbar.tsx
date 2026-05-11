@@ -3,11 +3,13 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/layout/logo";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -15,8 +17,12 @@ export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
+  const { resolvedTheme } = useTheme();
   const { scrollY } = useScroll();
   const isHome = pathname === "/";
+
+  React.useEffect(() => setMounted(true), []);
 
   useMotionValueEvent(scrollY, "change", (v) => {
     setScrolled(v > 12);
@@ -27,18 +33,28 @@ export function Navbar() {
     setOpen(false);
   }, [pathname]);
 
+  const isDark = mounted && resolvedTheme === "dark";
+
   return (
     <motion.header
       initial={false}
       animate={{
         backgroundColor: scrolled
-          ? "rgba(255, 255, 255, 0.55)"
-          : "rgba(255, 255, 255, 0)",
+          ? isDark
+            ? "rgba(14, 5, 29, 0.75)"
+            : "rgba(255, 255, 255, 0.55)"
+          : isDark
+            ? "rgba(14, 5, 29, 0)"
+            : "rgba(255, 255, 255, 0)",
         boxShadow: scrolled
-          ? "0 8px 32px -4px rgba(0, 0, 0, 0.08)"
+          ? isDark
+            ? "0 8px 32px -4px rgba(0, 0, 0, 0.3)"
+            : "0 8px 32px -4px rgba(0, 0, 0, 0.08)"
           : "0 0 0 0 transparent",
         borderBottomColor: scrolled
-          ? "rgba(0, 0, 0, 0.06)"
+          ? isDark
+            ? "rgba(255, 255, 255, 0.06)"
+            : "rgba(0, 0, 0, 0.06)"
           : "rgba(0, 0, 0, 0)",
       }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -89,12 +105,13 @@ export function Navbar() {
 
         <div className="flex flex-1 items-center justify-end gap-5">
           <div className="hidden items-center gap-2 text-sm font-semibold xl:flex">
-            <span className="text-[#1D5BFF]">EN</span>
+            <span className="text-foreground">EN</span>
             <span className="text-muted-foreground/30">|</span>
             <span className="text-muted-foreground">العربية</span>
           </div>
+          <ThemeToggle />
           <Link href="/demo">
-            <Button size="default" className="hidden rounded-xl bg-[#1D5BFF] px-6 font-semibold text-white hover:bg-[#1A52E5] sm:inline-flex">
+            <Button size="default" className="hidden rounded-xl px-6 font-semibold sm:inline-flex">
               Book a Demo
             </Button>
           </Link>
@@ -119,7 +136,7 @@ export function Navbar() {
           opacity: open ? 1 : 0,
         }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className="overflow-hidden border-t border-border/60 bg-[rgba(255,255,255,0.95)] backdrop-blur-xl xl:hidden"
+        className="overflow-hidden border-t border-border/60 bg-background/95 backdrop-blur-xl xl:hidden"
       >
         <Container className="flex flex-col gap-1 py-4">
           {siteConfig.nav.map((item) => (
@@ -133,12 +150,12 @@ export function Navbar() {
           ))}
           <div className="mt-4 flex flex-col gap-4">
             <div className="flex items-center justify-center gap-2 text-sm font-semibold">
-              <span className="text-[#1D5BFF]">EN</span>
+              <span className="text-foreground">EN</span>
               <span className="text-muted-foreground/30">|</span>
               <span className="text-muted-foreground">العربية</span>
             </div>
             <Link href="/demo" className="w-full">
-              <Button size="lg" className="w-full rounded-xl bg-[#1D5BFF] font-semibold text-white hover:bg-[#1A52E5]">
+              <Button size="lg" className="w-full rounded-xl font-semibold">
                 Book a Demo
               </Button>
             </Link>

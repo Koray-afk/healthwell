@@ -45,7 +45,7 @@ export function Wellness() {
           title={
             <>
               Wellness Resources{" "}
-              <span className="italic text-primary">&</span> Support
+              <span className="font-sans text-primary">&</span> Support
             </>
           }
           description="Explore wellness resources and personalized support tools tailored to your goals."

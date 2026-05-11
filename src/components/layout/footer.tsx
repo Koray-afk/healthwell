@@ -41,15 +41,15 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-24 bg-[#09090b]">
+    <footer className="mt-24 bg-dark-section">
       <Container className="py-14 sm:py-16">
           <div className="grid gap-12 md:grid-cols-12">
             <div className="md:col-span-5">
               <Link href="/" className="group inline-flex items-center gap-3 font-display text-xl tracking-tight">
                 <div className="relative inline-flex size-16 items-center justify-center transition-transform group-hover:rotate-[-6deg]">
-                  <Image src="/LOGO%20ONLY.svg" alt="Wizzaid" width={96} height={96} />
+                  <Image src="/LOGO%20ONLY.svg" alt="Wizzaid" width={96} height={96} className="dark:brightness-0 dark:invert" />
                 </div>
-                <span className="text-2xl font-semibold bg-gradient-to-b from-white to-[#3b82f6] bg-clip-text text-transparent">Wizzaid</span>
+                <span className="text-2xl font-semibold bg-gradient-to-b from-white to-[#3b82f6] dark:to-zinc-400 bg-clip-text text-transparent">Wizzaid</span>
               </Link>
               <p className="mt-4 max-w-sm text-sm text-[rgba(255,255,255,0.55)]">
                 {siteConfig.description}
@@ -130,7 +130,7 @@ function SocialLink({
       aria-label={label}
       target="_blank"
       rel="noreferrer"
-      className="inline-flex size-9 items-center justify-center rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] text-[rgba(255,255,255,0.7)] transition-colors hover:border-[#3b82f6] hover:text-[#3b82f6]"
+      className="inline-flex size-9 items-center justify-center rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] text-[rgba(255,255,255,0.7)] transition-colors hover:border-[#3b82f6] hover:text-[#3b82f6] dark:hover:border-white dark:hover:text-white"
     >
       {children}
     </Link>

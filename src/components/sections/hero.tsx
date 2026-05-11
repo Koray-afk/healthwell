@@ -38,18 +38,18 @@ export function Hero() {
     <section className="relative overflow-hidden pb-0 pt-16 sm:pt-20 lg:pt-24">
       {/* Animated gradient mesh background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-[-10%] h-[60vh] w-[80vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--accent),transparent_70%)] opacity-60 blur-3xl" />
-        <div className="absolute right-[-10%] top-1/3 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,var(--primary),transparent_70%)] opacity-20 blur-3xl" />
+        <div className="absolute left-1/2 top-[-10%] h-[60vh] w-[80vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--accent),transparent_70%)] opacity-60 blur-3xl dark:opacity-30" />
+        <div className="absolute right-[-10%] top-1/3 h-72 w-72 rounded-full bg-[radial-gradient(closest-side,var(--primary),transparent_70%)] opacity-20 blur-3xl dark:opacity-15" />
         {/* Extra floating orbs */}
         <motion.div
           animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-          className="absolute left-[10%] top-[20%] h-48 w-48 rounded-full bg-[radial-gradient(closest-side,#3b82f6,transparent_70%)] opacity-10 blur-3xl"
+          className="absolute left-[10%] top-[20%] h-48 w-48 rounded-full bg-[radial-gradient(closest-side,#3b82f6,transparent_70%)] dark:bg-[radial-gradient(closest-side,#71717a,transparent_70%)] opacity-10 blur-3xl dark:opacity-20"
         />
         <motion.div
           animate={{ y: [0, 15, 0], x: [0, -12, 0] }}
           transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
-          className="absolute right-[15%] top-[30%] h-56 w-56 rounded-full bg-[radial-gradient(closest-side,#8b5cf6,transparent_70%)] opacity-10 blur-3xl"
+          className="absolute right-[15%] top-[30%] h-56 w-56 rounded-full bg-[radial-gradient(closest-side,#8b5cf6,transparent_70%)] dark:bg-[radial-gradient(closest-side,#a1a1aa,transparent_70%)] opacity-10 blur-3xl dark:opacity-20"
         />
       </div>
 
@@ -76,7 +76,7 @@ export function Hero() {
           >
             <span className="text-foreground">Improve Your Health</span>{" "}
             <span className="italic text-primary/70">with</span>{" "}
-            <span className="whitespace-nowrap bg-gradient-to-r from-primary via-[#6366f1] to-primary bg-clip-text text-transparent">
+            <span className="whitespace-nowrap bg-gradient-to-r from-primary via-[#6366f1] dark:via-zinc-500 to-primary bg-clip-text text-transparent">
               Wizzaid
             </span>
           </motion.h1>
@@ -147,11 +147,11 @@ export function Hero() {
           {[...integrations, ...integrations].map((item, index) => (
             <span
               key={`${item.label}-${index}`}
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#09090b] px-5 py-2 text-sm font-medium text-white"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background dark:bg-secondary dark:text-foreground"
             >
               {item.label}
               {item.soon ? (
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[rgba(255,255,255,0.4)]">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-background/40 dark:text-foreground/40">
                   soon
                 </span>
               ) : null}
