@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -66,7 +65,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-medium text-primary shadow-sm backdrop-blur-sm"
           >
             <Sparkles className="size-3.5" />
-            Empowering well-being, one habit at a time
+            Beyond the clinic visit
           </motion.span>
 
           {/* Headline with mixed weight + gradient */}
@@ -74,10 +73,9 @@ export function Hero() {
             variants={fadeUp}
             className="font-display mt-8 text-balance text-5xl leading-[1.02] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
           >
-            <span className="text-foreground">Improve Your Health</span>{" "}
-            <span className="italic text-primary/70">with</span>{" "}
+            <span className="text-foreground">Keep Patients Connected</span>{" "}
             <span className="whitespace-nowrap bg-gradient-to-r from-primary via-[#6366f1] dark:via-zinc-500 to-primary bg-clip-text text-transparent">
-              Wizzaid
+              Beyond Appointments
             </span>
           </motion.h1>
 
@@ -85,9 +83,9 @@ export function Hero() {
             variants={fadeUp}
             className="mt-6 max-w-xl text-pretty text-base text-muted-foreground sm:text-lg"
           >
-            Wizzaid simplifies your healthcare experience, putting you in
-            control of your well-being. Take the first step toward a healthier,
-            happier life.
+            Wizzaid helps clinics, providers, and insurers deliver AI-powered
+            continuous care through patient engagement, follow-up, monitoring,
+            and preventive health programs.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -129,15 +127,39 @@ export function Hero() {
               ))}
             </div>
             <span>
-              <span className="font-semibold text-foreground">+1.8M</span>{" "}
-              happy clients use Wizzaid® daily
+              <span className="font-semibold text-foreground">30k</span>{" "}
+              happy customers use Wizzaid daily
             </span>
           </motion.div>
         </motion.div>
       </Container>
 
-      {/* === Integration marquee — floating dark pills === */}
+      {/* === Dashboard preview container === */}
       <Container className="mt-16">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+          className="relative mx-auto max-w-5xl"
+        >
+          {/* Dashboard image */}
+          <div className="relative overflow-hidden rounded-2xl border border-white/10">
+            <Image
+              src="/dashboardimage.png"
+              alt="Wizzaid clinical dashboard"
+              width={1200}
+              height={780}
+              className="w-full object-cover"
+              priority
+            />
+            {/* Bottom fade */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+          </div>
+        </motion.div>
+      </Container>
+
+      {/* === Integration marquee — floating dark pills === */}
+      <Container className="mt-10">
         <div className="relative overflow-hidden py-5">
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
@@ -151,7 +173,7 @@ export function Hero() {
             >
               {item.label}
               {item.soon ? (
-                <span className="text-[10px] uppercase tracking-[0.2em] text-background/40 dark:text-foreground/40">
+                <span className="inline-flex items-center rounded-full bg-background/15 px-1.5 py-0.5 text-[9px] font-semibold uppercase leading-none tracking-widest text-background/60 dark:bg-foreground/10 dark:text-foreground/50">
                   soon
                 </span>
               ) : null}

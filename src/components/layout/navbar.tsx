@@ -20,8 +20,6 @@ export function Navbar() {
   const [mounted, setMounted] = React.useState(false);
   const { resolvedTheme } = useTheme();
   const { scrollY } = useScroll();
-  const isHome = pathname === "/";
-
   React.useEffect(() => setMounted(true), []);
 
   useMotionValueEvent(scrollY, "change", (v) => {
@@ -66,7 +64,7 @@ export function Navbar() {
         <div className="flex flex-1 items-center justify-start">
           <Logo
             showWord={false}
-            className="h-20 w-72 shrink-0 md:h-[110px] md:w-[380px]"
+            className="h-12 w-56 shrink-0 md:h-14 md:w-64"
           />
         </div>
 
@@ -104,11 +102,6 @@ export function Navbar() {
         </nav>
 
         <div className="flex flex-1 items-center justify-end gap-5">
-          <div className="hidden items-center gap-2 text-sm font-semibold xl:flex">
-            <span className="text-foreground">EN</span>
-            <span className="text-muted-foreground/30">|</span>
-            <span className="text-muted-foreground">العربية</span>
-          </div>
           <ThemeToggle />
           <Link href="/demo">
             <Button size="default" className="hidden rounded-xl px-6 font-semibold sm:inline-flex">
@@ -149,11 +142,6 @@ export function Navbar() {
             </Link>
           ))}
           <div className="mt-4 flex flex-col gap-4">
-            <div className="flex items-center justify-center gap-2 text-sm font-semibold">
-              <span className="text-foreground">EN</span>
-              <span className="text-muted-foreground/30">|</span>
-              <span className="text-muted-foreground">العربية</span>
-            </div>
             <Link href="/demo" className="w-full">
               <Button size="lg" className="w-full rounded-xl font-semibold">
                 Book a Demo

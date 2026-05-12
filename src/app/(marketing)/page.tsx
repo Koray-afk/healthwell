@@ -3,7 +3,6 @@ import { Expedition } from "@/components/sections/expedition";
 import { Stats } from "@/components/sections/stats";
 import { Tracking } from "@/components/sections/tracking";
 import { Appointments } from "@/components/sections/appointments";
-import { Wellness } from "@/components/sections/wellness";
 import { Testimonials } from "@/components/sections/testimonials";
 import { Faq } from "@/components/sections/faq";
 import { Articles } from "@/components/sections/articles";
@@ -19,7 +18,6 @@ export default function Home() {
       <Tracking />
       <Appointments />
       <AppShowcase />
-      <Wellness />
       <Testimonials />
       <Faq />
       <Articles />

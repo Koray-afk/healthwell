@@ -18,46 +18,54 @@ import { cn } from "@/lib/utils";
 
 const tracks = [
   {
-    id: "medication",
-    title: "Medication Tracking",
+    id: "ai-assistant",
+    title: "AI Health Assistant",
     description:
-      "Set reminders for medication intake, track adherence, and receive refill notifications.",
+      "Chat with Wizza AI for personalized health guidance, symptom support, medication help, and continuous engagement.",
+    detail:
+      "Personalized AI guidance for symptoms, medications, appointments, and health-related questions.",
     icon: Pill,
-    image:
-      "https://framerusercontent.com/images/pOBrOh7Mo3MyTwNtRyIO3KsDDbE.png",
+    image: "/wizza%20ai%20image%201.png",
   },
   {
-    id: "symptom",
-    title: "Symptom Tracking",
+    id: "health-insights",
+    title: "Personalized Health Insights",
     description:
-      "Record symptoms, severity, and duration to track health trends and patterns.",
+      "Monitor health scores, vitals, activity, and personalized recommendations powered by AI-driven analysis.",
+    detail:
+      "Track health trends, vitals, activity, and AI-generated recommendations in one connected experience.",
     icon: HeartPulse,
-    image:
-      "https://framerusercontent.com/images/hbj7WdD7eT5qdttQGw2fWVahojA.png",
+    image: "/vitalsscreenimage.png",
   },
   {
-    id: "activity",
-    title: "Activity Tracking",
-    description: "Record daily steps, distance, calories burned, and active minutes.",
+    id: "medication-adherence",
+    title: "Medication Adherence",
+    description:
+      "Set reminders, improve adherence, and receive intelligent follow-up notifications for ongoing care.",
+    detail:
+      "Improve follow-up and medication consistency with intelligent reminders and proactive notifications.",
     icon: Activity,
-    image:
-      "https://framerusercontent.com/images/x9fGimzEnIYwaxJkG9dCwHhxy4M.png",
+    image: "/reminderimage2.png",
   },
   {
-    id: "nutrition",
-    title: "Nutrition Tracking",
-    description: "Log food intake, track macronutrients, and monitor calorie consumption.",
-    icon: Apple,
-    image:
-      "https://framerusercontent.com/images/zWWLRkMLXUMbalHn0HvzE6ltRQ.png",
-  },
-  {
-    id: "sleep",
-    title: "Sleep Tracking",
-    description: "Monitor sleep duration, quality, and patterns to optimize sleep habits.",
+    id: "chronic-care",
+    title: "Preventive & Chronic Care Programs",
+    description:
+      "Support long-term health outcomes with structured care programs for diabetes, obesity, hypertension, and more.",
+    detail:
+      "Deliver structured preventive and chronic care journeys designed for better long-term outcomes.",
     icon: Moon,
-    image:
-      "https://framerusercontent.com/images/80zU2pI28Anyo9vdumlHUF7gsY.png",
+    image: "/healthprogramsimage3.png",
+  },
+  {
+    id: "web3-identity",
+    title: "Web3 Identity & Rewards",
+    description:
+      "Secure patient identity, verifiable consent, and engagement rewards powered by Solana infrastructure.",
+    detail:
+      "Secure patient identity, verifiable consent, and engagement rewards powered by Solana infrastructure.",
+    icon: Apple,
+    image: "/web3identityandrewards.png",
   },
 ];
 
@@ -107,11 +115,10 @@ export function Tracking() {
           eyebrow="Features"
           title={
             <>
-              Health Tracking <span className="font-sans text-primary">&</span>{" "}
-              Monitoring
+              Continuous Care Features
             </>
           }
-          description="Track activity, nutrition, vital signs, and medication adherence — all in one calm, focused experience."
+          description="AI-powered engagement, monitoring, adherence, and preventive care — designed to keep patients connected beyond the clinic visit."
         />
 
         <div className="mt-16 grid items-center gap-10 lg:grid-cols-[1fr_auto_1fr]">
@@ -156,10 +163,92 @@ export function Tracking() {
             })}
           </ul>
 
-          {/* iPhone mockup */}
-          <div className="relative mx-auto h-[560px] w-[280px] shrink-0 rounded-[3rem] border-[10px] border-[#1c1c1e] bg-[#1c1c1e] shadow-2xl">
-            <div className="absolute left-1/2 top-2 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-[#1c1c1e]" />
-            <div className="relative h-full w-full overflow-hidden rounded-[2.2rem] bg-muted">
+          {/* iPhone mockup — liquid glass frame */}
+          <div className="relative mx-auto shrink-0" style={{ width: 296, height: 584 }}>
+
+            {/* Outer glass frame */}
+            <div
+              className="absolute inset-0 rounded-[3.25rem]"
+              style={{
+                background: "linear-gradient(160deg, #3a3a3c 0%, #1c1c1e 45%, #2a2a2c 100%)",
+                boxShadow: `
+                  0 0 0 1px rgba(255,255,255,0.13),
+                  0 30px 80px -10px rgba(0,0,0,0.75),
+                  0 12px 32px -4px rgba(0,0,0,0.55),
+                  inset 0 1.5px 0 rgba(255,255,255,0.18),
+                  inset 0 -1px 0 rgba(0,0,0,0.4)
+                `,
+              }}
+            />
+
+            {/* Glass sheen on frame */}
+            <div
+              className="pointer-events-none absolute inset-0 rounded-[3.25rem]"
+              style={{
+                background: "linear-gradient(135deg, rgba(255,255,255,0.09) 0%, transparent 45%, rgba(255,255,255,0.04) 100%)",
+              }}
+            />
+
+            {/* Volume up */}
+            <div
+              className="absolute rounded-l-sm"
+              style={{
+                left: -5, top: 116, width: 4, height: 30,
+                background: "linear-gradient(to right, #4a4a4c, #2c2c2e)",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 1px 3px rgba(0,0,0,0.5)",
+              }}
+            />
+            {/* Volume down */}
+            <div
+              className="absolute rounded-l-sm"
+              style={{
+                left: -5, top: 158, width: 4, height: 30,
+                background: "linear-gradient(to right, #4a4a4c, #2c2c2e)",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 1px 3px rgba(0,0,0,0.5)",
+              }}
+            />
+            {/* Mute switch */}
+            <div
+              className="absolute rounded-l-sm"
+              style={{
+                left: -5, top: 82, width: 4, height: 22,
+                background: "linear-gradient(to right, #4a4a4c, #2c2c2e)",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 1px 3px rgba(0,0,0,0.5)",
+              }}
+            />
+            {/* Power button */}
+            <div
+              className="absolute rounded-r-sm"
+              style={{
+                right: -5, top: 130, width: 4, height: 56,
+                background: "linear-gradient(to left, #4a4a4c, #2c2c2e)",
+                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.15), 0 1px 3px rgba(0,0,0,0.5)",
+              }}
+            />
+
+            {/* Screen area */}
+            <div
+              className="absolute overflow-hidden"
+              style={{
+                inset: 11,
+                borderRadius: "2.6rem",
+                background: "#000",
+              }}
+            >
+              {/* Dynamic Island */}
+              <div
+                className="absolute left-1/2 z-20 -translate-x-1/2"
+                style={{
+                  top: 10,
+                  width: 110,
+                  height: 32,
+                  borderRadius: 20,
+                  background: "#000",
+                  boxShadow: "0 0 0 1px rgba(255,255,255,0.06)",
+                }}
+              />
+
+              {/* Screen image */}
               <AnimatePresence>
                 <motion.div
                   key={active.id}
@@ -173,11 +262,20 @@ export function Tracking() {
                     src={active.image}
                     alt={active.title}
                     fill
-                    sizes="280px"
+                    sizes="274px"
                     className="object-cover"
                   />
                 </motion.div>
               </AnimatePresence>
+
+              {/* Screen inner shadow for depth */}
+              <div
+                className="pointer-events-none absolute inset-0 z-10"
+                style={{
+                  borderRadius: "2.6rem",
+                  boxShadow: "inset 0 0 20px rgba(0,0,0,0.35)",
+                }}
+              />
             </div>
           </div>
 
@@ -187,7 +285,7 @@ export function Tracking() {
               <active.icon className="size-6" />
             </span>
             <h3 className="font-display text-3xl">{active.title}</h3>
-            <p className="text-muted-foreground">{active.description}</p>
+            <p className="text-muted-foreground">{active.detail}</p>
             <div className="mt-4 flex items-center gap-2">
               <button
                 onClick={() => changeTrack(-1)}

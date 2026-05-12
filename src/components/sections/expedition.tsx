@@ -9,14 +9,14 @@ import { fadeUp, stagger, viewport } from "@/lib/motion";
 
 const gallery = [
   {
-    src: "https://framerusercontent.com/images/rTCecVJvlUX4vk5N62cZegy9A.png",
-    alt: "Woman centering herself before a workout",
-    className: "object-[50%_18%]",
+    src: "/clinician1image.png",
+    alt: "Doctor reviewing patient data on laptop",
+    className: "object-[50%_30%]",
   },
   {
-    src: "https://framerusercontent.com/images/SJeYfmDXTnQ78kAjryUb3BRTfCM.png",
-    alt: "Fresh orange slices in sparkling water",
-    className: "object-[50%_45%]",
+    src: "/patientmonitoringimage.png",
+    alt: "Patient monitoring health on smartphone",
+    className: "object-[50%_30%]",
   },
   {
     src: "https://framerusercontent.com/images/gKM8NHPF6nUIuVZAxt5Z3WTWk4M.png",
@@ -110,18 +110,19 @@ export function Expedition() {
                   variants={fadeUp}
                   className="font-display text-balance text-4xl leading-[1.08] text-foreground sm:text-5xl lg:text-6xl"
                 >
-                  Empowering Well-being:
+                  Patients Need Care
                   <br />
-                  Our Expedition
+                  Beyond the Clinic
                 </motion.h2>
                 <motion.p
                   variants={fadeUp}
                   className="text-pretty text-base leading-relaxed text-foreground/80 sm:text-lg"
                 >
-                  We believe that everyone deserves access to quality healthcare.
-                  Our journey began with a simple yet powerful idea: to create a
-                  healthcare app that empowers individuals to take control of
-                  their health and well-being.
+                  Most healthcare systems lose visibility once a patient leaves
+                  the clinic. Wizzaid helps providers stay connected through
+                  AI-powered engagement, monitoring, follow-up, and preventive
+                  care, improving outcomes while reducing long-term healthcare
+                  costs.
                 </motion.p>
               </div>
 

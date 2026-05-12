@@ -10,11 +10,11 @@ export function Logo({ className, showWord = true }: { className?: string; showW
         className={cn("relative block h-12 w-52 shrink-0 md:w-60", className)}
       >
         <Image
-          src="/LOGO%20SIDEWAYS.svg"
+          src="/wizzaid%20white%20logo%20proper.png"
           alt="Wizzaid"
           fill
           sizes="288px"
-          className="object-contain object-left dark:brightness-0 dark:invert"
+          className="object-contain object-left"
           priority
         />
       </Link>

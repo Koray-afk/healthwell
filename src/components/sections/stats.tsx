@@ -12,13 +12,17 @@ import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { fadeUp, stagger, viewport } from "@/lib/motion";
 
-const stats = [
-  { value: 3_000_000, prefix: "+", suffix: "", label: "Health Trackers Utilized", format: "M" },
-  { value: 1_800_000, prefix: "+", suffix: "", label: "Users and Downloads", format: "M" },
-  { value: 750_000, prefix: "+", suffix: "", label: "Appointments Managed", format: "k" },
-  { value: 40, prefix: "+", suffix: "%", label: "Medication Adherence", format: "raw" },
-  { value: 75_000, prefix: "+", suffix: "", label: "Community Engagement", format: "k" },
-] as const;
+type Stat =
+  | { kind: "number"; value: number; prefix: string; suffix: string; label: string; format: string }
+  | { kind: "text"; display: string; label: string };
+
+const stats: Stat[] = [
+  { kind: "number", value: 8_000, prefix: "", suffix: "+", label: "Patients Managed", format: "k" },
+  { kind: "number", value: 80, prefix: "", suffix: "+", label: "Clinics & Hospitals", format: "raw" },
+  { kind: "number", value: 100, prefix: "", suffix: "+", label: "Care Providers", format: "raw" },
+  { kind: "number", value: 5, prefix: "", suffix: "+", label: "Health Programs", format: "raw" },
+  { kind: "text", display: "GCC + EU", label: "Expansion Markets" },
+];
 
 function formatNum(n: number, kind: string) {
   if (kind === "M") return (n / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
@@ -59,13 +63,13 @@ export function Stats() {
           {/* Heading */}
           <div className="flex flex-col items-center gap-4 text-center">
             <span className="inline-flex items-center rounded-full border border-dark-section-border bg-dark-section-card px-3 py-1 text-xs font-medium uppercase tracking-widest text-[rgba(255,255,255,0.7)]">
-              Statistics
+              Traction &amp; Impact
             </span>
             <h2 className="font-display text-balance text-4xl leading-[1.05] text-white sm:text-5xl lg:text-6xl">
-              Users <span className="italic text-zinc-500">&</span> Engagement
+              Trusted Across the Healthcare Ecosystem
             </h2>
             <p className="mx-auto max-w-2xl text-pretty text-base text-[rgba(255,255,255,0.55)] sm:text-lg">
-              Through innovative tools and a supportive community, our users have achieved over 100,000 health goals — driving positive change one person at a time.
+              Wizzaid enables continuous care through AI-powered engagement, monitoring, and provider workflows across clinics, healthcare partners, and chronic care programs.
             </p>
           </div>
 
@@ -83,9 +87,15 @@ export function Stats() {
                 variants={fadeUp}
                 className="group relative overflow-hidden rounded-2xl border border-dark-section-border bg-dark-section-card p-6 text-left transition-colors hover:border-zinc-500/40"
               >
-                <span className="font-display text-5xl text-zinc-400 sm:text-6xl">
-                  <Counter to={s.value} format={s.format} prefix={s.prefix} suffix={s.suffix} />
-                </span>
+                {s.kind === "number" ? (
+                  <span className="font-display text-5xl text-zinc-400 sm:text-6xl">
+                    <Counter to={s.value} format={s.format} prefix={s.prefix} suffix={s.suffix} />
+                  </span>
+                ) : (
+                  <span className="font-display text-4xl text-zinc-400 sm:text-5xl whitespace-nowrap">
+                    {s.display}
+                  </span>
+                )}
                 <p className="mt-3 text-sm text-[rgba(255,255,255,0.55)]">{s.label}</p>
                 <div className="pointer-events-none absolute -right-8 -top-8 size-24 rounded-full bg-zinc-500/10 blur-2xl transition-opacity group-hover:opacity-80" />
               </motion.li>
