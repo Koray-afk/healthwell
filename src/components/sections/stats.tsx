@@ -11,6 +11,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { fadeUp, stagger, viewport } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 type Stat =
   | { kind: "number"; value: number; prefix: string; suffix: string; label: string; format: string }
@@ -57,47 +58,53 @@ function Counter({
 
 export function Stats() {
   return (
-    <Section id="stats" className="py-16 sm:py-20">
+    <Section id="stats" className="py-20 sm:py-24 lg:py-28">
       <Container>
-        <div className="overflow-hidden rounded-[2.5rem] bg-dark-section px-8 py-14 sm:px-12 sm:py-20">
-          {/* Heading */}
-          <div className="flex flex-col items-center gap-4 text-center">
-            <span className="inline-flex items-center rounded-full border border-dark-section-border bg-dark-section-card px-3 py-1 text-xs font-medium uppercase tracking-widest text-[rgba(255,255,255,0.7)]">
-              Traction &amp; Impact
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-16">
+          {/* Left — heading */}
+          <div className="flex flex-col gap-6 lg:sticky lg:top-28 lg:self-start">
+            <span className="text-sm font-medium uppercase tracking-widest text-primary">
+              Statistics
             </span>
-            <h2 className="font-display text-balance text-4xl leading-[1.05] text-white sm:text-5xl lg:text-6xl">
-              Trusted Across the Healthcare Ecosystem
+            <h2 className="font-display text-balance text-4xl leading-[1.05] sm:text-5xl lg:text-6xl">
+              Users &amp; Engagement
             </h2>
-            <p className="mx-auto max-w-2xl text-pretty text-base text-[rgba(255,255,255,0.55)] sm:text-lg">
-              Wizzaid enables continuous care through AI-powered engagement, monitoring, and provider workflows across clinics, healthcare partners, and chronic care programs.
+            <p className="max-w-md text-pretty text-base text-muted-foreground sm:text-lg">
+              Wizzaid powers continuous care through AI-driven engagement,
+              monitoring, and provider workflows — keeping patients connected to
+              their clinics, partners, and chronic care programs.
             </p>
           </div>
 
-          {/* Stats grid */}
+          {/* Right — stat cards */}
           <motion.ul
             initial="hidden"
             whileInView="show"
             viewport={viewport}
             variants={stagger(0.08)}
-            className="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5"
+            className="grid grid-cols-1 gap-4 sm:grid-cols-6"
           >
-            {stats.map((s) => (
+            {stats.map((s, i) => (
               <motion.li
                 key={s.label}
                 variants={fadeUp}
-                className="group relative overflow-hidden rounded-2xl border border-dark-section-border bg-dark-section-card p-6 text-left transition-colors hover:border-zinc-500/40"
+                className={cn(
+                  "group relative flex min-h-60 flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-7 transition-colors hover:border-primary/40 hover:bg-secondary/30",
+                  // Top row: 2 cards × 3 cols. Bottom row: 3 cards × 2 cols.
+                  i < 2 ? "sm:col-span-3" : "sm:col-span-2",
+                )}
               >
                 {s.kind === "number" ? (
-                  <span className="font-display text-5xl text-zinc-400 sm:text-6xl">
+                  <span className="font-display text-6xl text-primary sm:text-7xl">
                     <Counter to={s.value} format={s.format} prefix={s.prefix} suffix={s.suffix} />
                   </span>
                 ) : (
-                  <span className="font-display text-4xl text-zinc-400 sm:text-5xl whitespace-nowrap">
+                  <span className="whitespace-nowrap font-display text-5xl text-primary sm:text-6xl">
                     {s.display}
                   </span>
                 )}
-                <p className="mt-3 text-sm text-[rgba(255,255,255,0.55)]">{s.label}</p>
-                <div className="pointer-events-none absolute -right-8 -top-8 size-24 rounded-full bg-zinc-500/10 blur-2xl transition-opacity group-hover:opacity-80" />
+                <p className="mt-6 text-base text-foreground/70">{s.label}</p>
+                <div className="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full bg-primary/10 opacity-0 blur-3xl transition-opacity duration-300 group-hover:opacity-100" />
               </motion.li>
             ))}
           </motion.ul>

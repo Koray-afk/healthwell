@@ -57,7 +57,7 @@ export function Navbar() {
       }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-transparent backdrop-blur-2xl backdrop-saturate-[1.8] supports-[backdrop-filter]:backdrop-blur-2xl",
+        "relative z-50 w-full border-b border-transparent backdrop-blur-2xl backdrop-saturate-[1.8] supports-[backdrop-filter]:backdrop-blur-2xl",
       )}
     >
       <Container className="relative flex h-24 items-center justify-between gap-6">

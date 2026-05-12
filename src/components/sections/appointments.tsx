@@ -1,6 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import * as React from "react";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import {
   CalendarDays,
   Video,
@@ -11,38 +18,16 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { stagger, viewport } from "@/lib/motion";
+import { fadeUp, stagger, viewport } from "@/lib/motion";
 
-const tileVariants = {
-  hidden: {
-    opacity: 0,
-    y: 28,
-    scale: 0.98,
-    filter: "blur(6px)",
-  },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.75,
-      delay: i * 0.08,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-    },
-  }),
+type Tile = {
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+  body: React.ReactNode;
 };
 
-const mockVariants = {
-  hidden: { opacity: 0, y: 14 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  },
-};
-
-const tiles = [
+const tiles: Tile[] = [
   {
     title: "Appointment Scheduling",
     description: "Book appointments with healthcare providers in seconds.",
@@ -81,68 +66,166 @@ const tiles = [
   },
 ];
 
-export function Appointments() {
+function TileCard({ tile }: { tile: Tile }) {
+  const Icon = tile.icon;
   return (
-    <Section id="features-appointments">
-      <Container>
-        <SectionHeading
-          eyebrow="Features"
-          title={
-            <>
-              Appointment Management{" "}
-              <span className="font-sans text-primary">&</span> Communication
-            </>
-          }
-          description="Easily schedule appointments, access virtual consultations, and stay in touch with healthcare providers."
-        />
+    <article className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm transition-colors hover:border-primary/30">
+      <div className="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full bg-primary/0 blur-2xl transition-all duration-500 group-hover:bg-primary/6" />
+      <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+        <Icon className="size-5" />
+      </span>
+      <div>
+        <h3 className="font-display text-2xl">{tile.title}</h3>
+        <p className="mt-1 text-sm text-muted-foreground">{tile.description}</p>
+      </div>
+      <div className="mt-2 min-h-0 flex-1 overflow-hidden">{tile.body}</div>
+    </article>
+  );
+}
 
-        <div className="mt-14 overflow-hidden rounded-[2.5rem] bg-dark-section p-4 sm:p-6 lg:p-8">
+/**
+ * A card that slides into the grid as the section is scrolled — row 1 drops in
+ * from above the container, row 2 rises in from below it. (The container clips
+ * the overshoot, so they appear to come "out of" the box edges.)
+ */
+function ConvergingCard({
+  tile,
+  index,
+  progress,
+}: {
+  tile: Tile;
+  index: number;
+  progress: MotionValue<number>;
+}) {
+  const row = Math.floor(index / 3); // 0 (top) | 1 (bottom)
+  const yDir = row === 0 ? -1 : 1; // top row from above, bottom row from below
+  const SPREAD_Y = 480;
+
+  // Each card converges over its own slice of the scroll — staggered by index
+  const start = 0.12 + index * 0.045;
+  const end = 0.6 + index * 0.045;
+
+  const y = useTransform(progress, [start, end], [yDir * SPREAD_Y, 0]);
+  const opacity = useTransform(progress, [start, start + 0.04], [0, 1]);
+  const scale = useTransform(progress, [start, end], [0.92, 1]);
+
+  return (
+    // fixed (viewport-relative) height so two rows always fit inside the box,
+    // never cropped by the pinned screen
+    <motion.div
+      style={{ y, opacity, scale }}
+      className="h-[clamp(19rem,33vh,25rem)]"
+    >
+      <TileCard tile={tile} />
+    </motion.div>
+  );
+}
+
+export function Appointments() {
+  const outerRef = React.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: outerRef,
+    offset: ["start start", "end end"],
+  });
+  const p = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 40,
+    restDelta: 0.0005,
+  });
+
+  // Heading: alone on screen first, then fades + drifts up as the cards arrive
+  const headingOpacity = useTransform(p, [0, 0.04, 0.34, 0.44], [0, 1, 1, 0]);
+  const headingY = useTransform(p, [0, 0.04, 0.12, 0.44], [24, 0, 0, -28]);
+  const headingScale = useTransform(p, [0.12, 0.44], [1, 0.94]);
+
+  // The box container fades + scales in as you start scrolling
+  const boxOpacity = useTransform(p, [0.02, 0.14], [0, 1]);
+  const boxScale = useTransform(p, [0.02, 0.16], [0.97, 1]);
+
+  return (
+    <>
+      {/* ===================== Desktop: pinned scroll timeline ===================== */}
+      <section
+        id="features-appointments"
+        ref={outerRef}
+        className="relative hidden bg-background lg:block"
+        style={{ height: "320vh" }}
+      >
+        <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
+          {/* soft glow */}
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_45%,var(--color-primary),transparent)]/8" />
+
+          {/* The box container — cards live inside it and slide in past its clipped edges */}
+          <Container>
+            <motion.div
+              style={{ opacity: boxOpacity, scale: boxScale }}
+              className="relative overflow-hidden rounded-[2rem] border border-border bg-secondary/30 p-4 sm:rounded-[2.5rem] sm:p-6 lg:p-8"
+            >
+              <div className="grid grid-cols-3 gap-4 sm:gap-5">
+                {tiles.map((t, i) => (
+                  <ConvergingCard key={t.title} tile={t} index={i} progress={p} />
+                ))}
+              </div>
+            </motion.div>
+          </Container>
+
+          {/* Heading — on top, shown first */}
+          <motion.div
+            style={{ opacity: headingOpacity }}
+            className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-8"
+          >
+            <motion.div
+              style={{ y: headingY, scale: headingScale }}
+              className="flex max-w-3xl flex-col items-center text-center"
+            >
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+                Features
+              </span>
+              <h2 className="mt-4 font-display text-balance text-4xl leading-[1.08] text-foreground sm:text-5xl lg:text-6xl">
+                Appointment Management{" "}
+                <span className="font-sans text-primary">&</span> Communication
+              </h2>
+              <p className="mt-4 max-w-xl text-pretty text-base text-muted-foreground sm:text-lg">
+                Easily schedule appointments, access virtual consultations, and
+                stay in touch with healthcare providers.
+              </p>
+              <span className="mt-7 inline-flex size-12 items-center justify-center rounded-full bg-secondary text-primary">
+                <CalendarDays className="size-5" />
+              </span>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===================== Mobile: simple stacked grid ===================== */}
+      <Section className="bg-background lg:hidden">
+        <Container>
+          <SectionHeading
+            eyebrow="Features"
+            title={
+              <>
+                Appointment Management{" "}
+                <span className="font-sans text-primary">&</span> Communication
+              </>
+            }
+            description="Easily schedule appointments, access virtual consultations, and stay in touch with healthcare providers."
+          />
           <motion.div
             initial="hidden"
             whileInView="show"
             viewport={viewport}
-            variants={stagger(0.04, 0.08)}
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            variants={stagger(0.08)}
+            className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2"
           >
-            {tiles.map((t, i) => {
-              const Icon = t.icon;
-              return (
-                <motion.article
-                  key={t.title}
-                  custom={i}
-                  variants={tileVariants}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 22 }}
-                  className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-dark-section-border bg-card p-6 shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-all hover:border-primary/30 hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)]"
-                >
-                  {/* Hover glow */}
-                  <div className="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full bg-primary/0 blur-2xl transition-all duration-500 group-hover:bg-primary/[0.06]" />
-
-                  <div className="flex items-start justify-between">
-                    <motion.span
-                      initial={{ opacity: 0, scale: 0.85 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={viewport}
-                      transition={{ duration: 0.5, delay: 0.12 + i * 0.06 }}
-                      className="inline-flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110"
-                    >
-                      <Icon className="size-5" />
-                    </motion.span>
-                  </div>
-                  <motion.div variants={mockVariants}>
-                    <h3 className="font-display text-2xl">{t.title}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{t.description}</p>
-                  </motion.div>
-                  <motion.div variants={mockVariants} className="mt-2 flex-1">
-                    {t.body}
-                  </motion.div>
-                </motion.article>
-              );
-            })}
+            {tiles.map((t) => (
+              <motion.div key={t.title} variants={fadeUp} className="h-full">
+                <TileCard tile={t} />
+              </motion.div>
+            ))}
           </motion.div>
-        </div>
-      </Container>
-    </Section>
+        </Container>
+      </Section>
+    </>
   );
 }
 

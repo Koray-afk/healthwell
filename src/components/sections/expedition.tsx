@@ -134,19 +134,19 @@ export function Expedition() {
                   viewport={viewport}
                   variants={galleryStagger}
                   style={{ x }}
-                  className="flex w-max gap-4 px-8 py-10 sm:gap-6 sm:px-12 lg:px-14"
+                  className="flex w-max"
                 >
                   {gallery.map((item) => (
                     <motion.figure
                       key={item.src}
                       variants={fadeUp}
-                      className="relative h-44 w-[70vw] shrink-0 overflow-hidden rounded-2xl bg-muted sm:h-52 sm:w-[45vw] lg:h-64 lg:w-[22rem]"
+                      className="relative h-56 w-[75vw] shrink-0 overflow-hidden bg-muted sm:h-72 sm:w-[42vw] lg:h-80 lg:w-[24rem]"
                     >
                       <Image
                         src={item.src}
                         alt={item.alt}
                         fill
-                        sizes="(max-width: 640px) 70vw, (max-width: 1024px) 45vw, 22rem"
+                        sizes="(max-width: 640px) 75vw, (max-width: 1024px) 42vw, 24rem"
                         className={`object-cover ${item.className}`}
                       />
                     </motion.figure>

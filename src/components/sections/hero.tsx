@@ -3,10 +3,56 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { fadeUp, stagger } from "@/lib/motion";
+
+/** An ECG / heart-monitor strip whose waveform scrolls continuously (slow). */
+function EcgLine() {
+  // One heartbeat over a 48 × 20 box (baseline y = 10)
+  const beat =
+    "M0 10 H8 l2 -2 l2 2 H17 l1 3 l2 -11 l2 12 l1 -4 H30 l2 -3 l3 3 H48";
+  return (
+    <span
+      aria-hidden
+      className="relative block h-8 w-44 overflow-hidden align-middle"
+      style={{
+        backgroundImage:
+          "linear-gradient(to right, rgb(128 128 128 / 0.16) 1px, transparent 1px), linear-gradient(to bottom, rgb(128 128 128 / 0.16) 1px, transparent 1px)",
+        backgroundSize: "7px 7px",
+        maskImage:
+          "linear-gradient(to right, transparent, #000 12%, #000 88%, transparent)",
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent, #000 12%, #000 88%, transparent)",
+      }}
+    >
+      <motion.span
+        className="absolute inset-y-0 left-0 flex"
+        animate={{ x: [0, -48] }}
+        transition={{ duration: 3.8, repeat: Infinity, ease: "linear" }}
+      >
+        {Array.from({ length: 8 }).map((_, i) => (
+          <svg
+            key={i}
+            viewBox="0 0 48 20"
+            className="h-full w-12 shrink-0"
+            style={{ filter: "drop-shadow(0 0 4px rgba(59,130,246,0.7))" }}
+          >
+            <path
+              d={beat}
+              fill="none"
+              stroke="#3b82f6"
+              strokeWidth={1.8}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        ))}
+      </motion.span>
+    </span>
+  );
+}
 
 const avatars = [
   "https://framerusercontent.com/images/4wjZwfbCu9WSrGLaPidnqyFVOiY.png",
@@ -34,7 +80,7 @@ const integrations = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pb-0 pt-16 sm:pt-20 lg:pt-24">
+    <section className="relative overflow-hidden pb-0 pt-8 sm:pt-10 lg:pt-12">
       {/* Animated gradient mesh background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-[-10%] h-[60vh] w-[80vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--accent),transparent_70%)] opacity-60 blur-3xl dark:opacity-30" />
@@ -62,16 +108,15 @@ export function Hero() {
           {/* Pill badge */}
           <motion.span
             variants={fadeUp}
-            className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-medium text-primary shadow-sm backdrop-blur-sm"
+            className="inline-block rounded-full border border-primary/20 bg-primary/5 p-2 text-primary shadow-sm backdrop-blur-sm"
           >
-            <Sparkles className="size-3.5" />
-            Beyond the clinic visit
+            <EcgLine />
           </motion.span>
 
           {/* Headline with mixed weight + gradient */}
           <motion.h1
             variants={fadeUp}
-            className="font-display mt-8 text-balance text-5xl leading-[1.02] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+            className="font-display mt-8 text-balance text-[1.97rem] leading-[1.1] sm:text-[2.47rem] md:text-[2.96rem] lg:text-[3.61rem]"
           >
             <span className="text-foreground">Keep Patients Connected</span>{" "}
             <span className="whitespace-nowrap bg-gradient-to-r from-primary via-[#6366f1] dark:via-zinc-500 to-primary bg-clip-text text-transparent">
