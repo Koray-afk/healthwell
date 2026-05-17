@@ -29,48 +29,49 @@ type Track = {
   description: string;
   icon: React.ComponentType<{ className?: string }>;
   image: string;
+  color: { bg: string; text: string; glow: string };
 };
 
 const tracks: Track[] = [
   {
     id: "ai-assistant",
     title: "AI Health Assistant",
-    description:
-      "Chat with Wizza AI for personalized guidance, symptom support, and medication help.",
+    description: "Chat with Wizza AI for personalized guidance, symptom support, and medication help.",
     icon: Sparkles,
     image: "/wizza%20ai%20image%201.png",
+    color: { bg: "bg-linear-to-br from-violet-500/20 to-violet-600/5 ring-1 ring-violet-500/20", text: "text-violet-500", glow: "shadow-violet-500/25" },
   },
   {
     id: "health-insights",
     title: "Personalized Health Insights",
-    description:
-      "Monitor health scores, vitals, activity, and AI-driven recommendations.",
+    description: "Monitor health scores, vitals, activity, and AI-driven recommendations.",
     icon: HeartPulse,
     image: "/vitalsscreenimage.png",
+    color: { bg: "bg-linear-to-br from-rose-500/20 to-rose-600/5 ring-1 ring-rose-500/20", text: "text-rose-500", glow: "shadow-rose-500/25" },
   },
   {
     id: "medication-adherence",
     title: "Medication Adherence",
-    description:
-      "Smart reminders and intelligent follow-up notifications for ongoing care.",
+    description: "Smart reminders and intelligent follow-up notifications for ongoing care.",
     icon: Activity,
     image: "/reminderimage2.png",
+    color: { bg: "bg-linear-to-br from-blue-500/20 to-blue-600/5 ring-1 ring-blue-500/20", text: "text-blue-500", glow: "shadow-blue-500/25" },
   },
   {
     id: "chronic-care",
     title: "Preventive & Chronic Care",
-    description:
-      "Structured care programs for diabetes, obesity, hypertension, and more.",
+    description: "Structured care programs for diabetes, obesity, hypertension, and more.",
     icon: Pill,
     image: "/healthprogramsimage3.png",
+    color: { bg: "bg-linear-to-br from-emerald-500/20 to-emerald-600/5 ring-1 ring-emerald-500/20", text: "text-emerald-500", glow: "shadow-emerald-500/25" },
   },
   {
     id: "web3-identity",
     title: "Web3 Identity & Rewards",
-    description:
-      "Secure patient identity, verifiable consent, and engagement rewards on Solana.",
+    description: "Secure patient identity, verifiable consent, and engagement rewards on Solana.",
     icon: ShieldCheck,
     image: "/web3identityandrewards.png",
+    color: { bg: "bg-linear-to-br from-amber-500/20 to-amber-600/5 ring-1 ring-amber-500/20", text: "text-amber-500", glow: "shadow-amber-500/25" },
   },
 ];
 
@@ -294,32 +295,29 @@ export function Tracking() {
                       <button
                         type="button"
                         onClick={() => setTrack(i)}
-                        className="group flex w-full items-start gap-4 py-2.5 text-left"
+                        className="group flex w-full items-start gap-3 py-2.5 text-left"
                       >
+                        {/* Gradient icon badge */}
                         <span
                           className={cn(
-                            "mt-3.5 h-px shrink-0 transition-all duration-300",
-                            on ? "w-12 bg-primary" : "w-6 bg-border group-hover:w-8 group-hover:bg-muted-foreground/50",
+                            "mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl transition-all duration-300 shadow-sm",
+                            on
+                              ? `${t.color.bg} ${t.color.text} ${t.color.glow} shadow-md`
+                              : "bg-secondary/60 text-muted-foreground/40 group-hover:text-muted-foreground",
                           )}
-                        />
+                        >
+                          <Icon className="size-4 shrink-0" />
+                        </span>
                         <span className="min-w-0 flex-1">
-                          <span className="flex items-center gap-2.5">
-                            <Icon
-                              className={cn(
-                                "size-4 shrink-0 transition-colors",
-                                on ? "text-primary" : "text-muted-foreground/40 group-hover:text-muted-foreground",
-                              )}
-                            />
-                            <span
-                              className={cn(
-                                "font-display text-2xl leading-tight transition-colors",
-                                on
-                                  ? "text-foreground"
-                                  : "text-muted-foreground/35 group-hover:text-muted-foreground/70",
-                              )}
-                            >
-                              {t.title}
-                            </span>
+                          <span
+                            className={cn(
+                              "font-display text-xl leading-tight transition-colors",
+                              on
+                                ? "text-foreground"
+                                : "text-muted-foreground/40 group-hover:text-muted-foreground/70",
+                            )}
+                          >
+                            {t.title}
                           </span>
                           <motion.span
                             initial={false}
@@ -330,7 +328,7 @@ export function Tracking() {
                             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                             className="block overflow-hidden"
                           >
-                            <span className="mt-2 block max-w-xs pl-6.5 text-sm leading-relaxed text-muted-foreground">
+                            <span className={cn("mt-1.5 block max-w-xs text-sm leading-relaxed text-muted-foreground")}>
                               {t.description}
                             </span>
                           </motion.span>
@@ -460,7 +458,7 @@ export function Tracking() {
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-3">
-                      <span className="inline-flex size-9 items-center justify-center rounded-xl bg-secondary text-primary">
+                      <span className={cn("inline-flex size-10 items-center justify-center rounded-xl shadow-sm", t.color.bg, t.color.text)}>
                         <Icon className="size-4" />
                       </span>
                       <h3 className="font-display text-2xl text-foreground">

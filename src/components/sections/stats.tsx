@@ -8,21 +8,24 @@ import {
   useTransform,
   animate,
 } from "framer-motion";
+import { Users, Building2, Stethoscope, Sparkles, Globe } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { fadeUp, stagger, viewport } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
+type StatIcon = React.ComponentType<{ className?: string }>;
+
 type Stat =
-  | { kind: "number"; value: number; prefix: string; suffix: string; label: string; format: string }
-  | { kind: "text"; display: string; label: string };
+  | { kind: "number"; value: number; prefix: string; suffix: string; label: string; format: string; icon: StatIcon; color: string; bg: string }
+  | { kind: "text"; display: string; label: string; icon: StatIcon; color: string; bg: string };
 
 const stats: Stat[] = [
-  { kind: "number", value: 8_000, prefix: "", suffix: "+", label: "Patients Managed", format: "k" },
-  { kind: "number", value: 80, prefix: "", suffix: "+", label: "Clinics & Hospitals", format: "raw" },
-  { kind: "number", value: 100, prefix: "", suffix: "+", label: "Care Providers", format: "raw" },
-  { kind: "number", value: 5, prefix: "", suffix: "+", label: "Health Programs", format: "raw" },
-  { kind: "text", display: "GCC + EU", label: "Expansion Markets" },
+  { kind: "number", value: 8_000, prefix: "", suffix: "+", label: "Patients Managed", format: "k", icon: Users, color: "text-blue-500", bg: "bg-blue-500/10" },
+  { kind: "number", value: 80, prefix: "", suffix: "+", label: "Clinics & Hospitals", format: "raw", icon: Building2, color: "text-violet-500", bg: "bg-violet-500/10" },
+  { kind: "number", value: 100, prefix: "", suffix: "+", label: "Care Providers", format: "raw", icon: Stethoscope, color: "text-emerald-500", bg: "bg-emerald-500/10" },
+  { kind: "number", value: 5, prefix: "", suffix: "+", label: "Health Programs", format: "raw", icon: Sparkles, color: "text-amber-500", bg: "bg-amber-500/10" },
+  { kind: "text", display: "GCC + EU", label: "Expansion Markets", icon: Globe, color: "text-rose-500", bg: "bg-rose-500/10" },
 ];
 
 function formatNum(n: number, kind: string) {
@@ -84,29 +87,41 @@ export function Stats() {
             variants={stagger(0.08)}
             className="grid grid-cols-1 gap-4 sm:grid-cols-6"
           >
-            {stats.map((s, i) => (
-              <motion.li
-                key={s.label}
-                variants={fadeUp}
-                className={cn(
-                  "group relative flex min-h-60 flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-7 transition-colors hover:border-primary/40 hover:bg-secondary/30",
-                  // Top row: 2 cards × 3 cols. Bottom row: 3 cards × 2 cols.
-                  i < 2 ? "sm:col-span-3" : "sm:col-span-2",
-                )}
-              >
-                {s.kind === "number" ? (
-                  <span className="font-display text-6xl text-primary sm:text-7xl">
-                    <Counter to={s.value} format={s.format} prefix={s.prefix} suffix={s.suffix} />
+            {stats.map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <motion.li
+                  key={s.label}
+                  variants={fadeUp}
+                  className={cn(
+                    "group relative flex min-h-60 flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-7 transition-all duration-300 hover:border-border/80 hover:shadow-lg",
+                    i < 2 ? "sm:col-span-3" : "sm:col-span-2",
+                  )}
+                >
+                  {/* Corner glow on hover */}
+                  <div className={`pointer-events-none absolute -right-8 -top-8 size-28 rounded-full blur-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${s.bg}`} />
+
+                  {/* Icon badge */}
+                  <span className={cn("inline-flex size-10 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110", s.bg, s.color)}>
+                    <Icon className="size-5" />
                   </span>
-                ) : (
-                  <span className="whitespace-nowrap font-display text-5xl text-primary sm:text-6xl">
-                    {s.display}
-                  </span>
-                )}
-                <p className="mt-6 text-base text-foreground/70">{s.label}</p>
-                <div className="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full bg-primary/10 opacity-0 blur-3xl transition-opacity duration-300 group-hover:opacity-100" />
-              </motion.li>
-            ))}
+
+                  {/* Number / text */}
+                  <div className="mt-auto">
+                    {s.kind === "number" ? (
+                      <span className={cn("font-display text-6xl sm:text-7xl", s.color)}>
+                        <Counter to={s.value} format={s.format} prefix={s.prefix} suffix={s.suffix} />
+                      </span>
+                    ) : (
+                      <span className={cn("whitespace-nowrap font-display text-5xl sm:text-6xl", s.color)}>
+                        {s.display}
+                      </span>
+                    )}
+                    <p className="mt-2 text-sm font-medium text-muted-foreground">{s.label}</p>
+                  </div>
+                </motion.li>
+              );
+            })}
           </motion.ul>
         </div>
       </Container>
